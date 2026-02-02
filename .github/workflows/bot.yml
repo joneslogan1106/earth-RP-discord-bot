@@ -2,19 +2,15 @@ name: Government Date Bot
 
 on:
   schedule:
-    # Run at midnight EST/EDT (covers both timezones)
-    - cron: '0 4 * * *'   # 04:00 UTC = 00:00 EDT (Mar-Nov)
-    - cron: '0 5 * * *'   # 05:00 UTC = 00:00 EST (Nov-Mar)
-    
-    # Also run every 30 minutes for availability
-    - cron: '*/30 * * * *'
+    - cron: '*/25 * * * *'  # Every 25 minutes
+    - cron: '0,5 4,5 * * *' # Midnight EST checks
     
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 28
+    timeout-minutes: 23
     
     steps:
     - name: Checkout repository
@@ -28,33 +24,36 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
         
-    - name: Initialize state file
-      run: |
-        if [ ! -f gov_state.json ]; then
-          echo '{"current_date": "'$(date -Iseconds)'", "last_run": "'$(date -I)'"}' > gov_state.json
-          echo "Created state file"
-        fi
-        
     - name: Run Discord Bot
       env:
         DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
       run: |
         echo "Starting Government Date Bot..."
-        echo "UTC: $(date -u)"
-        echo "EST: $(TZ=America/New_York date)"
+        echo "Auto-save enabled every 60 seconds"
         
-        timeout 27m python bot.py
+        # Run for 22 minutes
+        timeout 1320 python bot.py
         
         echo "Run completed"
         
-    - name: Save state changes
+    - name: Commit state changes
+      if: always()  # Always run this step even if bot times out
       run: |
+        echo "Saving any state changes..."
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         
-        if [[ -n $(git status --porcelain gov_state.json) ]]; then
-          git add gov_state.json
-          git commit -m "Update bot state"
-          git push
+        # Check if state file exists and has changes
+        if [ -f gov_state.json ]; then
+          if [[ -n $(git status --porcelain gov_state.json) ]]; then
+            git add gov_state.json
+            git commit -m "Save bot state - $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+            echo "✅ State saved to repository"
+          else
+            echo "📭 No changes to state file"
+          fi
+        else
+          echo "❌ State file not found"
         fi
