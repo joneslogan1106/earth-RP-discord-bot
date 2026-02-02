@@ -1,16 +1,20 @@
-name: 24/7 Discord Bot
+name: Government Date Bot
 
 on:
   schedule:
-    # Run every 25 minutes
-    - cron: '*/25 * * * *'
-  # Allow manual trigger
+    # Run at midnight EST/EDT (covers both timezones)
+    - cron: '0 4 * * *'   # 04:00 UTC = 00:00 EDT (Mar-Nov)
+    - cron: '0 5 * * *'   # 05:00 UTC = 00:00 EST (Nov-Mar)
+    
+    # Also run every 30 minutes for availability
+    - cron: '*/30 * * * *'
+    
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 24  # Stop after 24 minutes
+    timeout-minutes: 28
     
     steps:
     - name: Checkout repository
@@ -24,39 +28,33 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
         
-    - name: Create state file if missing
+    - name: Initialize state file
       run: |
         if [ ! -f gov_state.json ]; then
           echo '{"current_date": "'$(date -Iseconds)'", "last_run": "'$(date -I)'"}' > gov_state.json
-          echo "Created new state file"
-        else
-          echo "State file exists"
+          echo "Created state file"
         fi
         
-    - name: Run Discord Bot for 23 minutes
+    - name: Run Discord Bot
       env:
         DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
       run: |
-        echo "🤖 Starting Government Bot..."
-        echo "⏰ Will run for 23 minutes (GitHub Actions Free)..."
+        echo "Starting Government Date Bot..."
+        echo "UTC: $(date -u)"
+        echo "EST: $(TZ=America/New_York date)"
         
-        # Start the bot with timeout
-        timeout 23m python bot.py
+        timeout 27m python bot.py
         
-        echo "🔄 Completed run, restarting in next scheduled job..."
+        echo "Run completed"
         
-    - name: Commit state changes
+    - name: Save state changes
       run: |
-        # Save any state changes
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         
         if [[ -n $(git status --porcelain gov_state.json) ]]; then
           git add gov_state.json
-          git commit -m "Update bot state $(date)"
+          git commit -m "Update bot state"
           git push
-          echo "✅ State file updated and pushed"
-        else
-          echo "📭 No changes to state file"
         fi
