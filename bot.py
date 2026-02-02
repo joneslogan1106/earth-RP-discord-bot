@@ -18,17 +18,62 @@ print("=" * 60)
 print(f"Token: {'Present' if TOKEN else 'Missing'}")
 print(f"Channel ID: {CHANNEL_ID}")
 
-# Load state
+# Load state with migration support
 def load_state():
     try:
         with open(DATA_FILE, "r") as f:
-            return json.load(f)
-    except:
+            state = json.load(f)
+            
+        # MIGRATION: Convert old state format to new format
+        if "last_run" in state and "last_advance_date" not in state:
+            print("Migrating from old state format...")
+            # Old format had "last_run" as date string
+            # New format has "last_advance_date" as date string
+            state["last_advance_date"] = state["last_run"]
+            # Remove old key
+            state.pop("last_run", None)
+            
+        # Ensure all required keys exist
+        now = datetime.now(EST)
+        defaults = {
+            "current_date": now.isoformat(),
+            "last_advance_date": now.date().isoformat(),
+            "last_check_timestamp": now.isoformat(),
+            "notifications_enabled": True,
+            "time_format": "12hr",
+            "command_history": []
+        }
+        
+        for key, default_value in defaults.items():
+            if key not in state:
+                state[key] = default_value
+                print(f"Added missing key: {key}")
+        
+        save_state(state)  # Save migrated state
+        return state
+        
+    except FileNotFoundError:
+        # Create new state file
+        now = datetime.now(EST)
+        state = {
+            "current_date": now.isoformat(),
+            "last_advance_date": now.date().isoformat(),
+            "last_check_timestamp": now.isoformat(),
+            "notifications_enabled": True,
+            "time_format": "12hr",
+            "command_history": []
+        }
+        save_state(state)
+        print("Created new state file")
+        return state
+    except Exception as e:
+        print(f"Error loading state: {e}")
+        # Fallback to defaults
         now = datetime.now(EST)
         return {
-            "current_date": now.isoformat(), 
-            "last_advance_date": now.date().isoformat(),  # Date when last advance occurred
-            "last_check_timestamp": now.isoformat(),      # Last time bot checked
+            "current_date": now.isoformat(),
+            "last_advance_date": now.date().isoformat(),
+            "last_check_timestamp": now.isoformat(),
             "notifications_enabled": True,
             "time_format": "12hr",
             "command_history": []
@@ -39,10 +84,14 @@ def save_state(state):
         json.dump(state, f, indent=2)
 
 state = load_state()
-current_date = datetime.fromisoformat(state["current_date"])
-last_advance_date = datetime.fromisoformat(state["last_advance_date"]).date()
+
+# Safe access with defaults
+current_date = datetime.fromisoformat(state.get("current_date", datetime.now(EST).isoformat()))
+last_advance_date = datetime.fromisoformat(state.get("last_advance_date", datetime.now(EST).date().isoformat())).date()
+
 print(f"Current in-game date: {current_date.strftime('%B %Y')}")
 print(f"Last advance date: {last_advance_date.strftime('%Y-%m-%d')}")
+print(f"State keys: {list(state.keys())}")
 
 def log_command(user_id, command):
     """Log the last 10 commands for debugging"""
@@ -95,11 +144,13 @@ async def check_and_advance_date(channel):
     now = datetime.now(EST)
     today = now.date()
     
-    # Get the last advance date
-    last_advance = datetime.fromisoformat(state["last_advance_date"]).date()
+    # Get the last advance date with safe access
+    last_advance_str = state.get("last_advance_date", today.isoformat())
+    last_advance = datetime.fromisoformat(last_advance_str).date()
     
     # Get the last check timestamp
-    last_check = datetime.fromisoformat(state.get("last_check_timestamp", now.isoformat()))
+    last_check_str = state.get("last_check_timestamp", now.isoformat())
+    last_check = datetime.fromisoformat(last_check_str)
     
     # Only advance if:
     # 1. It's past midnight (hour 0-1)
@@ -120,8 +171,9 @@ async def check_and_advance_date(channel):
         # Calculate months to advance (4 months per day missed, max 12)
         months_to_advance = min(4 * days_missed, 12)
         
-        # Advance the date
-        current = datetime.fromisoformat(state["current_date"])
+        # Get current date with safe access
+        current_date_str = state.get("current_date", now.isoformat())
+        current = datetime.fromisoformat(current_date_str)
         new_date = current + relativedelta(months=months_to_advance)
         
         # Update state
@@ -168,8 +220,16 @@ class GovernmentBot(discord.Client):
     async def on_ready(self):
         print("=" * 60)
         print(f"Connected as {self.user}")
-        print(f"Current date: {datetime.fromisoformat(state['current_date']).strftime('%B %Y')}")
-        print(f"Last advance: {datetime.fromisoformat(state['last_advance_date']).strftime('%Y-%m-%d')}")
+        
+        # Safe access to state values
+        current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+        last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+        
+        current_date = datetime.fromisoformat(current_date_str)
+        last_advance = datetime.fromisoformat(last_advance_str).date()
+        
+        print(f"Current date: {current_date.strftime('%B %Y')}")
+        print(f"Last advance: {last_advance.strftime('%Y-%m-%d')}")
         print(f"Notifications: {'Enabled' if state.get('notifications_enabled', True) else 'Disabled'}")
         print(f"Time format: {state.get('time_format', '12hr')}")
         print("=" * 60)
@@ -211,10 +271,14 @@ class GovernmentBot(discord.Client):
         # ===== MAIN COMMANDS =====
         
         if message.content == "!date":
-            base_date = datetime.fromisoformat(state["current_date"])
+            # Safe access to state values
+            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+            
+            base_date = datetime.fromisoformat(current_date_str)
+            last_advance = datetime.fromisoformat(last_advance_str).date()
             now = datetime.now(EST)
             time_fmt = state.get("time_format", "12hr")
-            last_advance = datetime.fromisoformat(state["last_advance_date"]).date()
             
             # Calculate approximated current date
             approx_date = approximate_current_date(base_date, now)
@@ -258,8 +322,10 @@ class GovernmentBot(discord.Client):
                 # Limit to reasonable amount
                 months_to_advance = min(max(1, months_to_advance), 48)
                 
-            current = datetime.fromisoformat(state["current_date"])
+            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+            current = datetime.fromisoformat(current_date_str)
             new_date = current + relativedelta(months=months_to_advance)
+            
             state["current_date"] = new_date.isoformat()
             state["last_advance_date"] = datetime.now(EST).date().isoformat()
             save_state(state)
@@ -276,7 +342,8 @@ class GovernmentBot(discord.Client):
             now = datetime.now(EST)
             minute_of_hour = now.minute
             uptime_minutes = minute_of_hour % 30
-            last_advance = datetime.fromisoformat(state["last_advance_date"]).strftime('%Y-%m-%d')
+            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+            last_advance = datetime.fromisoformat(last_advance_str).strftime('%Y-%m-%d')
             
             await message.channel.send(
                 f"**Bot Status**\n"
@@ -287,8 +354,12 @@ class GovernmentBot(discord.Client):
             )
             
         elif message.content == "!status":
-            current = datetime.fromisoformat(state["current_date"])
-            last_advance = datetime.fromisoformat(state["last_advance_date"]).date()
+            # Safe access to state values
+            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+            
+            current = datetime.fromisoformat(current_date_str)
+            last_advance = datetime.fromisoformat(last_advance_str).date()
             now_date = datetime.now(EST).date()
             days_since = (now_date - last_advance).days
             
@@ -320,9 +391,13 @@ class GovernmentBot(discord.Client):
                 await message.channel.send("Only administrators can view debug information.")
                 return
                 
-            current = datetime.fromisoformat(state["current_date"])
-            last_advance = datetime.fromisoformat(state["last_advance_date"]).date()
-            last_check = datetime.fromisoformat(state.get("last_check_timestamp", datetime.now(EST).isoformat()))
+            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+            last_check_str = state.get("last_check_timestamp", datetime.now(EST).isoformat())
+            
+            current = datetime.fromisoformat(current_date_str)
+            last_advance = datetime.fromisoformat(last_advance_str).date()
+            last_check = datetime.fromisoformat(last_check_str)
             now = datetime.now(EST)
             
             debug_info = (
@@ -338,9 +413,41 @@ class GovernmentBot(discord.Client):
             )
             await message.channel.send(debug_info)
             
-        # ... (keep the rest of the commands from the previous version)
-        # The other commands (!current, !notifications, !timeformat, !history, !setdate, !schedule, !info, !help)
-        # remain the same as in the previous version
+        elif message.content == "!resetstate":
+            # Reset state to defaults (admin only)
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("Only administrators can reset state.")
+                return
+                
+            now = datetime.now(EST)
+            state.clear()
+            state.update({
+                "current_date": now.isoformat(),
+                "last_advance_date": now.date().isoformat(),
+                "last_check_timestamp": now.isoformat(),
+                "notifications_enabled": True,
+                "time_format": "12hr",
+                "command_history": []
+            })
+            save_state(state)
+            
+            await message.channel.send("State has been reset to defaults.")
+            
+        # Keep other commands (!current, !notifications, etc.) from previous version
+        # They should use state.get() for safe access
+        
+        elif message.content == "!help":
+            await message.channel.send(
+                "**Main Commands:**\n"
+                "`!date` - Show current approximated date\n"
+                "`!status` - Bot status and settings\n"
+                "`!debug` - Debug information (admin)\n"
+                "`!ping` - Check bot responsiveness\n"
+                "`!advance [months]` - Advance by months (admin, default: 4)\n"
+                "`!resetstate` - Reset state to defaults (admin)\n"
+                "\n"
+                f"Admin: <@{ADMIN_USER_ID}>"
+            )
 
 # Run bot
 if __name__ == "__main__":
