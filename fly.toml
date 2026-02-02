@@ -1,0 +1,24 @@
+# fly.toml
+app = "earp-bot"  # Change this to something unique
+primary_region = "ord"      # Chicago region (good for US)
+
+[build]
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  
+  [[http_service.checks]]
+    interval = "30s"
+    timeout = "2s"
+    method = "GET"
+    path = "/"
+
+[experimental]
+  auto_rollback = true
