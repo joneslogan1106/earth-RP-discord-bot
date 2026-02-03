@@ -453,6 +453,43 @@ class GovernmentBot(discord.Client):
                 f"The date progresses through {current.strftime('%B %Y')} in real-time."
             )
             await message.channel.send(response)
+
+        # Add this to your command handling section (around line where !advance is)
+
+        elif message.content == "!send":
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("You are not authorized to use this command.")
+                return
+            
+            # Get notification channel
+            channel = await get_notification_channel(self)
+            if not channel:
+                await message.channel.send("ERROR: Cannot access notification channel. Check permissions and channel ID.")
+                return
+            
+            # Get current date info
+            current = datetime.fromisoformat(state["current_date"])
+            now = datetime.now(EST)
+            
+            # Create the message to send
+            message_content = (
+                f"Government Time Advancement\n"
+                f"1 real day has passed\n"
+                f"Advanced by 4 in-game months\n"
+                f"New in-game date: {current.strftime('%B %Y')}\n"
+                f"Time: {now.strftime('%I:%M:%S %p EST')}\n"
+                f"--------------------------------"
+            )
+            
+            try:
+                # Force send to notification channel
+                await channel.send(message_content)
+                await message.channel.send(f"✅ Message sent to #{channel.name}")
+                print(f"FORCE SENT: Message sent to #{channel.name}")
+            except discord.Forbidden:
+                await message.channel.send("❌ ERROR: Bot doesn't have permission to send messages in that channel.")
+            except Exception as e:
+                await message.channel.send(f"❌ ERROR: Failed to send message: {str(e)}")
             
         # !advance [months] - Manual advance (admin)
         elif message.content.startswith("!advance"):
