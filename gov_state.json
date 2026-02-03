@@ -1,7 +1,7 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T03:20:38.819316-05:00",
+  "last_check_timestamp": "2026-02-03T04:00:42.683885-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
@@ -154,6 +154,61 @@
       "user": "1367955172373823629",
       "command": "!send",
       "timestamp": "2026-02-03T00:08:35.882766-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "then sell me",
+      "timestamp": "2026-02-03T04:04:49.093415-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "JTAM",
+      "timestamp": "2026-02-03T04:04:50.400374-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "Only Australia got it",
+      "timestamp": "2026-02-03T04:06:19.304427-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "its not gonna be exported anytime soon",
+      "timestamp": "2026-02-03T04:06:25.880061-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "I need a BVRAAM missile",
+      "timestamp": "2026-02-03T04:07:17.860116-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "to operated in F-35",
+      "timestamp": "2026-02-03T04:07:24.814410-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "If I can't use my domestic G\u00f6kdo\u011fan",
+      "timestamp": "2026-02-03T04:07:33.882031-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "btw its nato standarts the integration wont take long",
+      "timestamp": "2026-02-03T04:07:42.316043-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "AMRAAM will do for now",
+      "timestamp": "2026-02-03T04:09:00.379295-05:00"
+    },
+    {
+      "user": "1249414539183657035",
+      "command": "Gaza war not moving",
+      "timestamp": "2026-02-03T04:16:14.967836-05:00"
+    },
+    {
+      "user": "1249414539183657035",
+      "command": "tuff",
+      "timestamp": "2026-02-03T04:16:15.487560-05:00"
     }
   ],
   "advancement_history": [
