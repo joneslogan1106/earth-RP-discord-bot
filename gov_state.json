@@ -1,50 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T10:34:45.696508-05:00",
+  "last_check_timestamp": "2026-02-03T11:34:52.466817-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1246130327701815379",
-      "command": "https://tenor.com/view/zarlie-zirk-gif-9277731991787754864",
-      "timestamp": "2026-02-03T10:45:25.235379-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Brazil-Argentina Talks",
-      "timestamp": "2026-02-03T10:45:31.205864-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Formal or informal?",
-      "timestamp": "2026-02-03T10:45:39.733904-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Helloo",
-      "timestamp": "2026-02-03T10:45:58.779778-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Welcome to the server",
-      "timestamp": "2026-02-03T10:46:00.945483-05:00"
-    },
-    {
-      "user": "1292788883079168073",
-      "command": "Hi \nThank you",
-      "timestamp": "2026-02-03T10:46:06.877030-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Brother Israel is going to fucking annex Palestine, this definitively affects you",
-      "timestamp": "2026-02-03T10:46:22.354038-05:00"
-    },
-    {
-      "user": "1292788883079168073",
-      "command": "So what\u2019s going on here",
-      "timestamp": "2026-02-03T10:46:26.635487-05:00"
-    },
     {
       "user": "1292788883079168073",
       "command": "Oh I can see is about politics oh year good",
@@ -254,6 +214,46 @@
       "user": "1246130327701815379",
       "command": "Iraq mention\ud83c\uddee\ud83c\uddf6\ud83d\udcaa",
       "timestamp": "2026-02-03T10:56:31.676606-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "<@984532331387818044>",
+      "timestamp": "2026-02-03T11:38:49.920566-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "okey",
+      "timestamp": "2026-02-03T11:38:50.472856-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "# Turkish Response to Israel #\n\n> Republic of Turkey does not recognize the Israeli illegal annexation of West Bank. We urge Israel to follow the 1994 Oslo Treaty and respect the Palestinian right to self determination. Which will include dismantling of all illegal Israeli Settlements in West Bank, withdrawal from East Jerusalem and revoke the annexation of West Bank.\n\n> Until these demands are met Republic of Turkey decided to take following actions against State of Israel\n\n> -Israeli oil imports which are using Baku-Tblisi-Ceyhan Pipeline are restricted. Israel will no longer able to import %45 of its Oil which will expect to create an inflationary Crisis in Israel.\n> -Shipping from Turkish Ports to Israel is banned this includes usage of Turkish Ports as intermediary locations in journeys to Israel.\n> -Turkey will halt all Air Travel to Israel from Turkey including restricting Turkish Airspace from flights heading to Israel\n> -Turkey will cease intelligence sharing with Israel\n> -%300 Tariffs will be imposed to Israel\n\n<@671859637015937052>",
+      "timestamp": "2026-02-03T11:40:04.553091-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "https://discord.com/channels/1465148715902959782/1465158921655292111/1468284919946940530\n\nEffects on Israeli economy",
+      "timestamp": "2026-02-03T11:40:21.426791-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "%46 of Israel oil is embargoed by me",
+      "timestamp": "2026-02-03T11:40:47.023320-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "they are about to face a massive energy crisis",
+      "timestamp": "2026-02-03T11:41:47.610673-05:00"
+    },
+    {
+      "user": "1246130327701815379",
+      "command": "Good",
+      "timestamp": "2026-02-03T11:43:37.548868-05:00"
+    },
+    {
+      "user": "1246130327701815379",
+      "command": "",
+      "timestamp": "2026-02-03T11:43:54.047343-05:00"
     }
   ],
   "advancement_history": [
