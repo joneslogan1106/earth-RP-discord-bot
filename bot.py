@@ -16,9 +16,9 @@ DATA_FILE = "gov_state.json"
 EST = ZoneInfo("America/New_York")
 
 print("=" * 60)
-print("🤖 GOVERNMENT DATE BOT")
+print("GOVERNMENT DATE BOT")
 print("=" * 60)
-print(f"Token: {'✅ PRESENT' if TOKEN else '❌ MISSING'}")
+print(f"Token: {'PRESENT' if TOKEN else 'MISSING'}")
 print(f"Channel ID: {CHANNEL_ID}")
 print(f"Admin ID: {ADMIN_USER_ID}")
 
@@ -38,7 +38,7 @@ def load_state():
             
         # Migration from old formats
         if "last_run" in state and "last_advance_date" not in state:
-            print("🔄 Migrating from old state format...")
+            print("Migrating from old state format...")
             state["last_advance_date"] = state["last_run"]
             del state["last_run"]
             
@@ -63,13 +63,13 @@ def load_state():
         for key, default_value in defaults.items():
             if key not in state:
                 state[key] = default_value
-                print(f"➕ Added missing key: {key}")
+                print(f"Added missing key: {key}")
         
         save_state()
         return state
         
     except FileNotFoundError:
-        print("📄 Creating new state file...")
+        print("Creating new state file...")
         now = datetime.now(EST)
         state = {
             "current_date": now.isoformat(),
@@ -89,7 +89,7 @@ def load_state():
         save_state()
         return state
     except Exception as e:
-        print(f"❌ Error loading state: {e}")
+        print(f"Error loading state: {e}")
         now = datetime.now(EST)
         state = {
             "current_date": now.isoformat(),
@@ -115,10 +115,10 @@ def save_state():
             with open(DATA_FILE, "w") as f:
                 json.dump(state, f, indent=2)
             last_save_time = time.time()
-            print(f"💾 State saved at {datetime.now().strftime('%H:%M:%S')}")
+            print(f"State saved at {datetime.now().strftime('%H:%M:%S')}")
             return True
         except Exception as e:
-            print(f"❌ Error saving state: {e}")
+            print(f"Error saving state: {e}")
             return False
 
 def auto_save_worker():
@@ -134,10 +134,10 @@ current_date = datetime.fromisoformat(state.get("current_date", datetime.now(EST
 last_advance_date = datetime.fromisoformat(state.get("last_advance_date", datetime.now(EST).date().isoformat())).date()
 today = datetime.now(EST).date()
 
-print(f"📅 Current in-game date: {current_date.strftime('%B %Y')}")
-print(f"⏰ Last advance: {last_advance_date.strftime('%Y-%m-%d')}")
-print(f"📆 Today: {today.strftime('%Y-%m-%d')}")
-print(f"🔧 Auto-save: Every {save_interval} seconds")
+print(f"Current in-game date: {current_date.strftime('%B %Y')}")
+print(f"Last advance: {last_advance_date.strftime('%Y-%m-%d')}")
+print(f"Today: {today.strftime('%Y-%m-%d')}")
+print(f"Auto-save: Every {save_interval} seconds")
 
 # Start auto-save thread
 auto_save_thread = threading.Thread(target=auto_save_worker, daemon=True)
@@ -244,12 +244,12 @@ async def get_notification_channel(client):
         if isinstance(channel, discord.TextChannel):
             permissions = channel.permissions_for(channel.guild.me)
             if not permissions.send_messages:
-                print(f"❌ No send permission in #{channel.name}")
+                print(f"No send permission in #{channel.name}")
                 return None
         
         return channel
     except Exception as e:
-        print(f"❌ Error getting channel: {e}")
+        print(f"Error getting channel: {e}")
         return None
 
 # ==================== ADVANCEMENT LOGIC ====================
@@ -268,7 +268,7 @@ async def check_and_advance_date(client, notification_channel=None):
     days_missed = (today - last_advance).days
     
     if state.get("settings", {}).get("debug_mode", False):
-        print(f"🔍 DEBUG Advance Check:")
+        print(f"DEBUG Advance Check:")
         print(f"   Last advance: {last_advance}")
         print(f"   Today: {today}")
         print(f"   Days missed: {days_missed}")
@@ -276,7 +276,7 @@ async def check_and_advance_date(client, notification_channel=None):
     
     # Advance if we've missed days
     if days_missed > 0:
-        print(f"🚀 ADVANCE NEEDED: {days_missed} day(s) missed")
+        print(f"ADVANCE NEEDED: {days_missed} day(s) missed")
         
         # Calculate advancement
         months_per_day = state.get("settings", {}).get("months_per_day", 4)
@@ -298,7 +298,7 @@ async def check_and_advance_date(client, notification_channel=None):
         if state.get("settings", {}).get("auto_save", True):
             save_state()
         
-        print(f"📈 ADVANCED: {current.strftime('%B %Y')} → {new_date.strftime('%B %Y')}")
+        print(f"ADVANCED: {current.strftime('%B %Y')} -> {new_date.strftime('%B %Y')}")
         print(f"   Months: {months_to_advance}")
         print(f"   Real days: {days_missed}")
         
@@ -307,32 +307,32 @@ async def check_and_advance_date(client, notification_channel=None):
             try:
                 if days_missed == 1:
                     message = (
-                        f"**📜 Government Time Advancement**\n"
-                        f"⏱️ **1 real day** has passed\n"
-                        f"📅 Advanced by **{months_to_advance}** in-game months\n"
-                        f"🗓️ New in-game date: **{new_date.strftime('%B %Y')}**\n"
-                        f"⏰ Time: {now.strftime('%I:%M:%S %p EST')}\n"
-                        f"────────────────────"
+                        f"Government Time Advancement\n"
+                        f"1 real day has passed\n"
+                        f"Advanced by {months_to_advance} in-game months\n"
+                        f"New in-game date: {new_date.strftime('%B %Y')}\n"
+                        f"Time: {now.strftime('%I:%M:%S %p EST')}\n"
+                        f"--------------------------------"
                     )
                 else:
                     remaining_days = days_missed - (months_to_advance // months_per_day)
                     message = (
-                        f"**📜 Government Time Advancement**\n"
-                        f"⏱️ Real days passed: **{days_missed}**\n"
-                        f"📅 In-game months advanced: **{months_to_advance}**\n"
-                        f"🗓️ New in-game date: **{new_date.strftime('%B %Y')}**\n"
-                        f"⏰ Time: {now.strftime('%I:%M:%S %p EST')}\n"
+                        f"Government Time Advancement\n"
+                        f"Real days passed: {days_missed}\n"
+                        f"In-game months advanced: {months_to_advance}\n"
+                        f"New in-game date: {new_date.strftime('%B %Y')}\n"
+                        f"Time: {now.strftime('%I:%M:%S %p EST')}\n"
                     )
                     if remaining_days > 0:
-                        message += f"📝 *Note: {remaining_days} day(s) will advance tomorrow*\n"
-                    message += "────────────────────"
+                        message += f"Note: {remaining_days} day(s) will advance tomorrow\n"
+                    message += "--------------------------------"
                 
                 await notification_channel.send(message)
-                print(f"📢 Notification sent to channel")
+                print(f"Notification sent to channel")
             except discord.Forbidden:
-                print(f"❌ No permission to send in channel")
+                print(f"No permission to send in channel")
             except Exception as e:
-                print(f"❌ Failed to send notification: {e}")
+                print(f"Failed to send notification: {e}")
         
         return True, days_missed, months_to_advance, new_date
     
@@ -347,7 +347,7 @@ async def check_and_advance_date(client, notification_channel=None):
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.members = True
+intents.members = True  # REMEMBER: You must enable "Server Members Intent" in Discord Developer Portal
 
 class GovernmentBot(discord.Client):
     def __init__(self):
@@ -357,26 +357,26 @@ class GovernmentBot(discord.Client):
         
     async def on_ready(self):
         print("=" * 60)
-        print(f"✅ BOT CONNECTED: {self.user}")
-        print(f"🆔 Bot ID: {self.user.id}")
-        print(f"⏰ Start time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S EST')}")
-        print(f"🌐 Servers: {len(self.guilds)}")
+        print(f"BOT CONNECTED: {self.user}")
+        print(f"Bot ID: {self.user.id}")
+        print(f"Start time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S EST')}")
+        print(f"Servers: {len(self.guilds)}")
         print("=" * 60)
         
         # Get current state
         current = datetime.fromisoformat(state.get("current_date", datetime.now(EST).isoformat()))
         last_adv = datetime.fromisoformat(state.get("last_advance_date", datetime.now(EST).date().isoformat())).date()
         
-        print(f"📅 Current date: {current.strftime('%B %Y')}")
-        print(f"⏰ Last advance: {last_adv.strftime('%Y-%m-%d')}")
-        print(f"🔔 Notifications: {'✅ ON' if state.get('notifications_enabled', True) else '❌ OFF'}")
+        print(f"Current date: {current.strftime('%B %Y')}")
+        print(f"Last advance: {last_adv.strftime('%Y-%m-%d')}")
+        print(f"Notifications: {'ON' if state.get('notifications_enabled', True) else 'OFF'}")
         
         # Get notification channel
         self.notification_channel = await get_notification_channel(self)
         if self.notification_channel:
-            print(f"📢 Notification channel: #{self.notification_channel.name}")
+            print(f"Notification channel: #{self.notification_channel.name}")
         else:
-            print(f"⚠️ No notification channel or no permissions")
+            print(f"No notification channel or no permissions")
         
         # Set bot status
         await self.change_presence(
@@ -387,13 +387,13 @@ class GovernmentBot(discord.Client):
         )
         
         # Check for advancements
-        print("🔍 Checking for missed advancements...")
+        print("Checking for missed advancements...")
         advanced, days_missed, months_advanced, new_date = await check_and_advance_date(
             self, self.notification_channel
         )
         
         if advanced:
-            print(f"✅ Auto-advance completed: {months_advanced} months")
+            print(f"Auto-advance completed: {months_advanced} months")
             # Update status with new date
             await self.change_presence(
                 activity=discord.Activity(
@@ -402,7 +402,7 @@ class GovernmentBot(discord.Client):
                 )
             )
         else:
-            print("⏭️ No advancement needed")
+            print("No advancement needed")
         
         print("=" * 60)
         
@@ -437,18 +437,18 @@ class GovernmentBot(discord.Client):
             hours, minutes, seconds = calculate_time_until(next_midnight)
             
             response = (
-                f"**📅 Current Date Information**\n"
-                f"────────────────────\n"
-                f"🗓️ **Base Period:** {current.strftime('%B %Y')}\n"
-                f"📆 **Current Approximation:** {approx_date.strftime('%B %d, %Y')}\n"
-                f"⏰ **Real Time:** {format_time(now, time_fmt)} EST\n"
+                f"Current Date Information\n"
+                f"--------------------------------\n"
+                f"Base Period: {current.strftime('%B %Y')}\n"
+                f"Current Approximation: {approx_date.strftime('%B %d, %Y')}\n"
+                f"Real Time: {format_time(now, time_fmt)} EST\n"
                 f"\n"
-                f"**⚙️ Advancement Status**\n"
-                f"────────────────────\n"
-                f"📊 **Last Advance:** {last_adv.strftime('%Y-%m-%d')} ({days_since} day{'s' if days_since != 1 else ''} ago)\n"
-                f"⏱️ **Next Auto-Advance:** {hours}h {minutes}m {seconds}s\n"
-                f"📈 **Rate:** {state.get('settings', {}).get('months_per_day', 4)} months per real day\n"
-                f"🔧 **Max per run:** {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
+                f"Advancement Status\n"
+                f"--------------------------------\n"
+                f"Last Advance: {last_adv.strftime('%Y-%m-%d')} ({days_since} day{'s' if days_since != 1 else ''} ago)\n"
+                f"Next Auto-Advance: {hours}h {minutes}m {seconds}s\n"
+                f"Rate: {state.get('settings', {}).get('months_per_day', 4)} months per real day\n"
+                f"Max per run: {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
                 f"\n"
                 f"The date progresses through {current.strftime('%B %Y')} in real-time."
             )
@@ -457,7 +457,7 @@ class GovernmentBot(discord.Client):
         # !advance [months] - Manual advance (admin)
         elif message.content.startswith("!advance"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             parts = message.content.split()
@@ -470,7 +470,7 @@ class GovernmentBot(discord.Client):
                     max_months = state.get("settings", {}).get("max_advance_per_run", 12) * 3
                     months_to_advance = min(max(1, months_to_advance), max_months)
                 except ValueError:
-                    await message.channel.send("❌ Invalid number. Usage: `!advance [months]`")
+                    await message.channel.send("Invalid number. Usage: !advance [months]")
                     return
             
             current = datetime.fromisoformat(state["current_date"])
@@ -493,12 +493,12 @@ class GovernmentBot(discord.Client):
             )
             
             response = (
-                f"✅ **Manual Advance Complete**\n"
-                f"────────────────────\n"
-                f"📈 **Advanced by:** {months_to_advance} month{'s' if months_to_advance != 1 else ''}\n"
-                f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
-                f"⏰ **Time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}\n"
-                f"👤 **By:** {message.author.mention}\n"
+                f"Manual Advance Complete\n"
+                f"--------------------------------\n"
+                f"Advanced by: {months_to_advance} month{'s' if months_to_advance != 1 else ''}\n"
+                f"New date: {new_date.strftime('%B %Y')}\n"
+                f"Time: {datetime.now(EST).strftime('%I:%M:%S %p EST')}\n"
+                f"By: {message.author.mention}\n"
                 f"\n"
                 f"Next auto-advance will occur at midnight EST."
             )
@@ -507,31 +507,31 @@ class GovernmentBot(discord.Client):
         # !force - Force advance check (admin)
         elif message.content == "!force":
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
-            await message.channel.send("🔍 Force checking for advancements...")
+            await message.channel.send("Force checking for advancements...")
             advanced, days_missed, months_advanced, new_date = await check_and_advance_date(
                 self, message.channel
             )
             
             if advanced:
                 response = (
-                    f"✅ **Force Advance Completed**\n"
-                    f"────────────────────\n"
-                    f"⏱️ **Days missed:** {days_missed}\n"
-                    f"📈 **Months advanced:** {months_advanced}\n"
-                    f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
-                    f"⏰ **Time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
+                    f"Force Advance Completed\n"
+                    f"--------------------------------\n"
+                    f"Days missed: {days_missed}\n"
+                    f"Months advanced: {months_advanced}\n"
+                    f"New date: {new_date.strftime('%B %Y')}\n"
+                    f"Time: {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
                 )
             else:
                 last_adv = datetime.fromisoformat(state["last_advance_date"]).date()
                 response = (
-                    f"⏭️ **No Advancement Needed**\n"
-                    f"────────────────────\n"
-                    f"📊 **Last advance:** {last_adv.strftime('%Y-%m-%d')}\n"
-                    f"📆 **Today:** {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
-                    f"⏰ **Current time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
+                    f"No Advancement Needed\n"
+                    f"--------------------------------\n"
+                    f"Last advance: {last_adv.strftime('%Y-%m-%d')}\n"
+                    f"Today: {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
+                    f"Current time: {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
                 )
             
             await message.channel.send(response)
@@ -539,15 +539,15 @@ class GovernmentBot(discord.Client):
         # !setdate <Month> <Year> - Set custom date (admin)
         elif message.content.startswith("!setdate"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             parts = message.content.split()
             if len(parts) != 3:
                 await message.channel.send(
-                    "❌ **Usage:** `!setdate <Month> <Year>`\n"
-                    "**Example:** `!setdate May 2026`\n"
-                    "**Example:** `!setdate December 2027`"
+                    "Usage: !setdate <Month> <Year>\n"
+                    "Example: !setdate May 2026\n"
+                    "Example: !setdate December 2027"
                 )
                 return
             
@@ -576,21 +576,21 @@ class GovernmentBot(discord.Client):
                 )
                 
                 response = (
-                    f"✅ **Date Successfully Set**\n"
-                    f"────────────────────\n"
-                    f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
-                    f"📊 **Previous date:** {old_date.strftime('%B %Y')}\n"
-                    f"⏰ **Last advance reset to:** {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
-                    f"👤 **By:** {message.author.mention}"
+                    f"Date Successfully Set\n"
+                    f"--------------------------------\n"
+                    f"New date: {new_date.strftime('%B %Y')}\n"
+                    f"Previous date: {old_date.strftime('%B %Y')}\n"
+                    f"Last advance reset to: {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
+                    f"By: {message.author.mention}"
                 )
                 await message.channel.send(response)
                 
             except ValueError:
                 await message.channel.send(
-                    "❌ **Invalid date format.**\n"
-                    "**Valid months:** January, February, March, April, May, June, July, "
+                    "Invalid date format.\n"
+                    "Valid months: January, February, March, April, May, June, July, "
                     "August, September, October, November, December\n"
-                    "**Example:** `!setdate May 2026`"
+                    "Example: !setdate May 2026"
                 )
                 
         # !status - Bot status
@@ -609,36 +609,36 @@ class GovernmentBot(discord.Client):
             uptime_str = f"{uptime.days}d {uptime.seconds//3600}h {(uptime.seconds%3600)//60}m"
             
             response = (
-                f"**🤖 Bot Status**\n"
-                f"────────────────────\n"
-                f"🤖 **Bot:** {self.user}\n"
-                f"🆔 **ID:** {self.user.id}\n"
-                f"⏰ **Uptime:** {uptime_str}\n"
-                f"🌐 **Servers:** {len(self.guilds)}\n"
+                f"Bot Status\n"
+                f"--------------------------------\n"
+                f"Bot: {self.user}\n"
+                f"ID: {self.user.id}\n"
+                f"Uptime: {uptime_str}\n"
+                f"Servers: {len(self.guilds)}\n"
                 f"\n"
-                f"**📅 Date Status**\n"
-                f"────────────────────\n"
-                f"🗓️ **Current date:** {current.strftime('%B %Y')}\n"
-                f"📊 **Last advance:** {last_adv.strftime('%Y-%m-%d')}\n"
-                f"⏱️ **Days since advance:** {days_since}\n"
-                f"🕛 **Next auto-advance:** {hours}h {minutes}m {seconds}s\n"
+                f"Date Status\n"
+                f"--------------------------------\n"
+                f"Current date: {current.strftime('%B %Y')}\n"
+                f"Last advance: {last_adv.strftime('%Y-%m-%d')}\n"
+                f"Days since advance: {days_since}\n"
+                f"Next auto-advance: {hours}h {minutes}m {seconds}s\n"
                 f"\n"
-                f"**🔧 Settings**\n"
-                f"────────────────────\n"
-                f"🔔 **Notifications:** {'✅ ON' if state.get('notifications_enabled', True) else '❌ OFF'}\n"
-                f"⏰ **Time format:** {state.get('time_format', '12hr')}\n"
-                f"📈 **Rate:** {state.get('settings', {}).get('months_per_day', 4)} months/day\n"
-                f"⚡ **Max/run:** {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
-                f"💾 **Auto-save:** {'✅ ON' if state.get('settings', {}).get('auto_save', True) else '❌ OFF'}\n"
+                f"Settings\n"
+                f"--------------------------------\n"
+                f"Notifications: {'ON' if state.get('notifications_enabled', True) else 'OFF'}\n"
+                f"Time format: {state.get('time_format', '12hr')}\n"
+                f"Rate: {state.get('settings', {}).get('months_per_day', 4)} months/day\n"
+                f"Max/run: {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
+                f"Auto-save: {'ON' if state.get('settings', {}).get('auto_save', True) else 'OFF'}\n"
                 f"\n"
-                f"**👑 Admin:** <@{ADMIN_USER_ID}>"
+                f"Admin: <@{ADMIN_USER_ID}>"
             )
             await message.channel.send(response)
             
         # !notifications [on/off] - Toggle notifications (admin)
         elif message.content.startswith("!notifications"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             parts = message.content.split()
@@ -646,17 +646,17 @@ class GovernmentBot(discord.Client):
                 setting = parts[1].lower()
                 if setting in ["on", "enable", "yes", "true"]:
                     state["notifications_enabled"] = True
-                    response = "✅ Notifications **ENABLED**"
+                    response = "Notifications ENABLED"
                 elif setting in ["off", "disable", "no", "false"]:
                     state["notifications_enabled"] = False
-                    response = "🔕 Notifications **DISABLED**"
+                    response = "Notifications DISABLED"
                 else:
-                    response = f"❌ Invalid setting. Use `!notifications on` or `!notifications off`"
+                    response = f"Invalid setting. Use !notifications on or !notifications off"
             else:
                 # Toggle
                 current = state.get("notifications_enabled", True)
                 state["notifications_enabled"] = not current
-                response = f"🔔 Notifications **{'ENABLED' if not current else 'DISABLED'}**"
+                response = f"Notifications {'ENABLED' if not current else 'DISABLED'}"
             
             save_state()
             await message.channel.send(response)
@@ -668,17 +668,17 @@ class GovernmentBot(discord.Client):
                 new_format = parts[1].lower()
                 if new_format in ["12hr", "12", "12h"]:
                     state["time_format"] = "12hr"
-                    response = "🕐 Time format set to **12-hour** (AM/PM)"
+                    response = "Time format set to 12-hour (AM/PM)"
                 elif new_format in ["24hr", "24", "24h"]:
                     state["time_format"] = "24hr"
-                    response = "🕐 Time format set to **24-hour**"
+                    response = "Time format set to 24-hour"
                 else:
-                    response = "❌ Invalid format. Use `12hr` or `24hr`"
+                    response = "Invalid format. Use 12hr or 24hr"
             else:
                 # Toggle
                 current = state.get("time_format", "12hr")
                 state["time_format"] = "24hr" if current == "12hr" else "12hr"
-                response = f"🕐 Time format changed to **{state['time_format']}**"
+                response = f"Time format changed to {state['time_format']}"
             
             save_state()
             await message.channel.send(response)
@@ -686,19 +686,19 @@ class GovernmentBot(discord.Client):
         # !save - Manual save
         elif message.content == "!save":
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             if save_state():
                 last_save = datetime.fromtimestamp(last_save_time).strftime('%Y-%m-%d %H:%M:%S')
-                await message.channel.send(f"✅ State saved successfully at {last_save}")
+                await message.channel.send(f"State saved successfully at {last_save}")
             else:
-                await message.channel.send("❌ Failed to save state")
+                await message.channel.send("Failed to save state")
                 
         # !debug [on/off] - Toggle debug mode (admin)
         elif message.content.startswith("!debug"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             if "settings" not in state:
@@ -709,18 +709,18 @@ class GovernmentBot(discord.Client):
                 setting = parts[1].lower()
                 if setting in ["on", "enable", "yes", "true"]:
                     state["settings"]["debug_mode"] = True
-                    response = "🐛 Debug mode **ENABLED**"
+                    response = "Debug mode ENABLED"
                 elif setting in ["off", "disable", "no", "false"]:
                     state["settings"]["debug_mode"] = False
-                    response = "🐛 Debug mode **DISABLED**"
+                    response = "Debug mode DISABLED"
                 else:
                     current = state["settings"].get("debug_mode", False)
-                    response = f"🐛 Debug mode is currently **{'ENABLED' if current else 'DISABLED'}**"
+                    response = f"Debug mode is currently {'ENABLED' if current else 'DISABLED'}"
             else:
                 # Toggle
                 current = state["settings"].get("debug_mode", False)
                 state["settings"]["debug_mode"] = not current
-                response = f"🐛 Debug mode **{'ENABLED' if not current else 'DISABLED'}**"
+                response = f"Debug mode {'ENABLED' if not current else 'DISABLED'}"
             
             save_state()
             await message.channel.send(response)
@@ -728,7 +728,7 @@ class GovernmentBot(discord.Client):
         # !history [commands/advances] - View history (admin)
         elif message.content.startswith("!history"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("❌ You are not authorized to use this command.")
+                await message.channel.send("You are not authorized to use this command.")
                 return
             
             parts = message.content.split()
@@ -737,79 +737,79 @@ class GovernmentBot(discord.Client):
             if history_type in ["cmd", "commands", "command"]:
                 history = state.get("command_history", [])
                 if not history:
-                    await message.channel.send("📭 No command history recorded.")
+                    await message.channel.send("No command history recorded.")
                     return
                 
                 # Show last 10 commands
                 recent = history[-10:]
-                response = "**📜 Recent Commands (Last 10)**\n────────────────────\n"
+                response = "Recent Commands (Last 10)\n--------------------------------\n"
                 for entry in recent:
                     dt = datetime.fromisoformat(entry["timestamp"])
-                    response += f"• <t:{int(dt.timestamp())}:R> - <@{entry['user']}>: `{entry['command']}`\n"
+                    response += f"• <t:{int(dt.timestamp())}:R> - <@{entry['user']}>: {entry['command']}\n"
                 
             elif history_type in ["adv", "advance", "advances", "advancement"]:
                 history = state.get("advancement_history", [])
                 if not history:
-                    await message.channel.send("📭 No advancement history recorded.")
+                    await message.channel.send("No advancement history recorded.")
                     return
                 
                 # Show last 5 advancements
                 recent = history[-5:]
-                response = "**📈 Recent Advancements (Last 5)**\n────────────────────\n"
+                response = "Recent Advancements (Last 5)\n--------------------------------\n"
                 for entry in recent:
                     dt = datetime.fromisoformat(entry["timestamp"])
                     old_date = datetime.fromisoformat(entry["old_date"])
                     new_date = datetime.fromisoformat(entry["new_date"])
                     response += (
                         f"• <t:{int(dt.timestamp())}:R>\n"
-                        f"  {old_date.strftime('%B %Y')} → {new_date.strftime('%B %Y')}\n"
+                        f"  {old_date.strftime('%B %Y')} -> {new_date.strftime('%B %Y')}\n"
                         f"  {entry['months_advanced']} months ({entry['days_missed']} days)\n"
                         f"  Type: {entry['type']}\n"
                     )
             else:
-                response = "❌ Invalid history type. Use `!history commands` or `!history advances`"
+                response = "Invalid history type. Use !history commands or !history advances"
             
             await message.channel.send(response)
             
         # !ping - Check latency
         elif message.content == "!ping":
             latency = round(self.latency * 1000, 2)
-            await message.channel.send(f"🏓 Pong! Latency: **{latency}ms**")
+            await message.channel.send(f"Pong! Latency: {latency}ms")
             
         # !help - Show help
         elif message.content == "!help":
             response = (
-                "**🤖 Government Date Bot - Help**\n"
-                "────────────────────\n"
-                "**📅 Date Commands:**\n"
-                "`!date` - Show current date information\n"
-                "`!status` - Show bot status\n"
-                "`!ping` - Check bot latency\n"
+                "Government Date Bot - Help\n"
+                "--------------------------------\n"
+                "Date Commands:\n"
+                "!date - Show current date information\n"
+                "!status - Show bot status\n"
+                "!ping - Check bot latency\n"
                 "\n"
-                "**👑 Admin Commands:**\n"
-                "`!advance [months]` - Manually advance date\n"
-                "`!force` - Force auto-advance check\n"
-                "`!setdate <Month> <Year>` - Set custom date\n"
-                "`!notifications [on/off]` - Toggle notifications\n"
-                "`!timeformat [12hr/24hr]` - Change time format\n"
-                "`!save` - Manually save state\n"
-                "`!debug [on/off]` - Toggle debug mode\n"
-                "`!history [commands/advances]` - View history\n"
+                "Admin Commands:\n"
+                "!advance [months] - Manually advance date\n"
+                "!force - Force auto-advance check\n"
+                "!setdate <Month> <Year> - Set custom date\n"
+                "!notifications [on/off] - Toggle notifications\n"
+                "!timeformat [12hr/24hr] - Change time format\n"
+                "!save - Manually save state\n"
+                "!debug [on/off] - Toggle debug mode\n"
+                "!history [commands/advances] - View history\n"
                 "\n"
-                "**⚙️ Settings:**\n"
+                "Settings:\n"
                 "• Auto-advance: 4 months per real day at midnight EST\n"
                 "• Max advance per run: 12 months\n"
                 "• Date progresses in real-time through each month\n"
                 "\n"
-                f"**Admin:** <@{ADMIN_USER_ID}>"
+                f"Admin: <@{ADMIN_USER_ID}>"
             )
             await message.channel.send(response)
             
         # Unknown command
         elif message.content.startswith("!"):
             await message.channel.send(
-                f"❓ Unknown command. Type `!help` for available commands.\n"
-                f"Did you mean `!date` or `!status`?"
+                f"Unknown command. Type !help for available commands.\n"
+                f"Did you mean !date or !status?"
             )
 
 # ==================== MAIN EXECUTION ====================
@@ -822,25 +822,25 @@ if __name__ == "__main__":
         import atexit
         def shutdown():
             print("\n" + "=" * 60)
-            print("🛑 Shutting down bot...")
+            print("Shutting down bot...")
             stop_event.set()
             if auto_save_thread:
                 auto_save_thread.join(timeout=5)
             save_state()
-            print("✅ Shutdown complete")
+            print("Shutdown complete")
             print("=" * 60)
         
         atexit.register(shutdown)
         
-        print("🚀 Starting bot...")
+        print("Starting bot...")
         bot.run(TOKEN)
         
     except discord.LoginFailure:
-        print("❌ ERROR: Invalid Discord token!")
+        print("ERROR: Invalid Discord token!")
     except KeyboardInterrupt:
-        print("\n⏹️ Bot stopped by user")
+        print("\nBot stopped by user")
     except Exception as e:
-        print(f"❌ ERROR: {type(e).__name__}: {e}")
+        print(f"ERROR: {type(e).__name__}: {e}")
         import traceback
         traceback.print_exc()
     finally:
