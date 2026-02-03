@@ -1,85 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T05:02:14.913071-05:00",
+  "last_check_timestamp": "2026-02-03T06:03:18.487066-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "<@1115754475332837528> Currently testing mb",
-      "timestamp": "2026-02-02T22:44:37.805365-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-02T22:45:14.103939-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!help",
-      "timestamp": "2026-02-02T22:45:19.707451-05:00"
-    },
-    {
-      "user": "806945403228127292",
-      "command": "Hello",
-      "timestamp": "2026-02-02T22:45:23.002898-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!setdate August 2026",
-      "timestamp": "2026-02-02T22:45:53.274410-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-02T22:46:04.599455-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-02T22:57:08.999321-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-02T22:57:54.062457-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "<@1115754475332837528> That's correct right?",
-      "timestamp": "2026-02-02T22:58:04.147778-05:00"
-    },
-    {
-      "user": "631060907417534464",
-      "command": "Algeria Germany arms Deal\nGermany will sell the following equipment to Algeria at a total price of $20 billion and have delivery by 2031\n\n-500 x tpz fuch 2\n-100k x Infanterist der Zukunft Tier A\n\n||<@1449879806924816430> ||",
-      "timestamp": "2026-02-02T23:05:43.051989-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-02T23:06:02.460543-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!help",
-      "timestamp": "2026-02-02T23:06:22.636783-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!ping",
-      "timestamp": "2026-02-02T23:06:37.024271-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!notifications on",
-      "timestamp": "2026-02-02T23:06:54.882053-05:00"
-    },
-    {
-      "user": "559273678110457857",
-      "command": "Gm when",
-      "timestamp": "2026-02-02T23:12:19.637264-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "Hopefully if I become mod, I'll help gm stuff",
@@ -214,6 +139,121 @@
       "user": "1246130327701815379",
       "command": "Tuff",
       "timestamp": "2026-02-03T05:18:42.640522-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "wat",
+      "timestamp": "2026-02-03T06:18:59.095694-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "why",
+      "timestamp": "2026-02-03T06:19:01.462675-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "is there something insane about to happen",
+      "timestamp": "2026-02-03T06:19:08.784457-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "It already happened",
+      "timestamp": "2026-02-03T06:21:12.342087-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "You need to comply",
+      "timestamp": "2026-02-03T06:21:22.011843-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "ive been out all day",
+      "timestamp": "2026-02-03T06:21:29.614814-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "what happened",
+      "timestamp": "2026-02-03T06:21:35.443936-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "https://discord.com/channels/1465148715902959782/1465159680862191696/1466565423553052847",
+      "timestamp": "2026-02-03T06:22:02.341381-05:00"
+    },
+    {
+      "user": "382804742503530496",
+      "command": "yo can we move the unpk training facilities from Nepal to like hebei",
+      "timestamp": "2026-02-03T06:22:06.364132-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "i see nothing to do with me at all in there",
+      "timestamp": "2026-02-03T06:22:43.930308-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "You are involved in Myanmae",
+      "timestamp": "2026-02-03T06:22:54.553368-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "A lot of the scam centres are on your border",
+      "timestamp": "2026-02-03T06:23:02.956337-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "Gun smugglers go through Thailand",
+      "timestamp": "2026-02-03T06:23:08.640087-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "uh huh",
+      "timestamp": "2026-02-03T06:23:21.799813-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "uh huh",
+      "timestamp": "2026-02-03T06:23:23.399649-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "so like is there something specific you want from me",
+      "timestamp": "2026-02-03T06:23:30.619203-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "I want you to tighten the border",
+      "timestamp": "2026-02-03T06:23:41.737440-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "ive already done that, i think",
+      "timestamp": "2026-02-03T06:23:55.349261-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "its before i started roleplaying",
+      "timestamp": "2026-02-03T06:23:59.759479-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "its a part of the policy of the party that just came to power",
+      "timestamp": "2026-02-03T06:24:09.325581-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "Fairs",
+      "timestamp": "2026-02-03T06:24:11.204252-05:00"
+    },
+    {
+      "user": "700103014928875670",
+      "command": "Maybe you could try cut the electricity to some of the towns these scam centres are in",
+      "timestamp": "2026-02-03T06:24:32.334838-05:00"
+    },
+    {
+      "user": "885718032519938058",
+      "command": "they were cut irl in early 2025",
+      "timestamp": "2026-02-03T06:24:52.078766-05:00"
     }
   ],
   "advancement_history": [
