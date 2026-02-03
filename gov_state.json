@@ -1,20 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T17:53:13.028562-05:00",
+  "last_check_timestamp": "2026-02-03T18:20:38.532304-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1456761963102339246",
-      "command": "Hello",
-      "timestamp": "2026-02-03T16:42:11.475036-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "<@1367955172373823629> never gm a meeting again \ud83d\ude2d",
-      "timestamp": "2026-02-03T16:42:12.742174-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "You said use AI",
@@ -254,6 +244,16 @@
       "user": "314943232112984064",
       "command": "We just share the risk and profits on an insurance company that helps to diversify our portfolios and fund our nations",
       "timestamp": "2026-02-03T17:59:55.106650-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Alright but what about the German part",
+      "timestamp": "2026-02-03T18:42:18.381418-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "How do they get to do that",
+      "timestamp": "2026-02-03T18:42:24.702281-05:00"
     }
   ],
   "advancement_history": [
