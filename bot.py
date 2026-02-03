@@ -4,42 +4,43 @@ import json
 import asyncio
 import threading
 import time
+import subprocess
 from datetime import datetime, time as dt_time, timedelta
 from dateutil.relativedelta import relativedelta
 from zoneinfo import ZoneInfo
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID", 0))
-ADVANCE_CHANNEL_ID = CHANNEL_ID  # Explicit variable for clarity
 ADMIN_USER_ID = 1367955172373823629
 DATA_FILE = "gov_state.json"
 EST = ZoneInfo("America/New_York")
 
 print("=" * 60)
-print("Government Date Bot - Online")
+print("🤖 GOVERNMENT DATE BOT")
 print("=" * 60)
-print(f"Token: {'Present' if TOKEN else 'Missing'}")
-print(f"Advance Channel ID: {ADVANCE_CHANNEL_ID}")
-print(f"Admin User ID: {ADMIN_USER_ID}")
+print(f"Token: {'✅ PRESENT' if TOKEN else '❌ MISSING'}")
+print(f"Channel ID: {CHANNEL_ID}")
+print(f"Admin ID: {ADMIN_USER_ID}")
 
-# Global state and save lock
+# Global state and save system
 state = {}
 save_lock = threading.Lock()
-save_interval = 60  # Save every 60 seconds
+save_interval = 60  # Auto-save every 60 seconds
 last_save_time = time.time()
+auto_save_thread = None
+stop_event = threading.Event()
 
-# Load state with migration support
 def load_state():
     global state
     try:
         with open(DATA_FILE, "r") as f:
             state = json.load(f)
             
-        # MIGRATION: Convert old state format to new format
+        # Migration from old formats
         if "last_run" in state and "last_advance_date" not in state:
-            print("Migrating from old state format...")
+            print("🔄 Migrating from old state format...")
             state["last_advance_date"] = state["last_run"]
-            state.pop("last_run", None)
+            del state["last_run"]
             
         # Ensure all required keys exist
         now = datetime.now(EST)
@@ -49,19 +50,26 @@ def load_state():
             "last_check_timestamp": now.isoformat(),
             "notifications_enabled": True,
             "time_format": "12hr",
-            "command_history": []
+            "command_history": [],
+            "advancement_history": [],
+            "settings": {
+                "max_advance_per_run": 12,
+                "months_per_day": 4,
+                "auto_save": True,
+                "debug_mode": False
+            }
         }
         
         for key, default_value in defaults.items():
             if key not in state:
                 state[key] = default_value
-                print(f"Added missing key: {key}")
+                print(f"➕ Added missing key: {key}")
         
-        save_state_internal()  # Save migrated state
+        save_state()
         return state
         
     except FileNotFoundError:
-        # Create new state file
+        print("📄 Creating new state file...")
         now = datetime.now(EST)
         state = {
             "current_date": now.isoformat(),
@@ -69,13 +77,19 @@ def load_state():
             "last_check_timestamp": now.isoformat(),
             "notifications_enabled": True,
             "time_format": "12hr",
-            "command_history": []
+            "command_history": [],
+            "advancement_history": [],
+            "settings": {
+                "max_advance_per_run": 12,
+                "months_per_day": 4,
+                "auto_save": True,
+                "debug_mode": False
+            }
         }
-        save_state_internal()
-        print("Created new state file")
+        save_state()
         return state
     except Exception as e:
-        print(f"Error loading state: {e}")
+        print(f"❌ Error loading state: {e}")
         now = datetime.now(EST)
         state = {
             "current_date": now.isoformat(),
@@ -83,47 +97,56 @@ def load_state():
             "last_check_timestamp": now.isoformat(),
             "notifications_enabled": True,
             "time_format": "12hr",
-            "command_history": []
+            "command_history": [],
+            "advancement_history": [],
+            "settings": {
+                "max_advance_per_run": 12,
+                "months_per_day": 4,
+                "auto_save": True,
+                "debug_mode": False
+            }
         }
         return state
 
-def save_state_internal():
-    """Save state to file (thread-safe)"""
+def save_state():
     global last_save_time
     with save_lock:
         try:
             with open(DATA_FILE, "w") as f:
                 json.dump(state, f, indent=2)
             last_save_time = time.time()
-            print(f"💾 State saved to file at {datetime.now().strftime('%H:%M:%S')}")
+            print(f"💾 State saved at {datetime.now().strftime('%H:%M:%S')}")
             return True
         except Exception as e:
             print(f"❌ Error saving state: {e}")
             return False
 
-def auto_save_worker(stop_event):
-    """Background thread that auto-saves state periodically"""
+def auto_save_worker():
+    """Background thread for auto-saving"""
     while not stop_event.is_set():
         time.sleep(save_interval)
-        if not stop_event.is_set():
-            save_state_internal()
+        if not stop_event.is_set() and state.get("settings", {}).get("auto_save", True):
+            save_state()
 
-# Initialize
+# Initialize state
 load_state()
 current_date = datetime.fromisoformat(state.get("current_date", datetime.now(EST).isoformat()))
 last_advance_date = datetime.fromisoformat(state.get("last_advance_date", datetime.now(EST).date().isoformat())).date()
+today = datetime.now(EST).date()
 
-print(f"Current in-game date: {current_date.strftime('%B %Y')}")
-print(f"Last advance date: {last_advance_date.strftime('%Y-%m-%d')}")
-print(f"Today's date: {datetime.now(EST).date().strftime('%Y-%m-%d')}")
+print(f"📅 Current in-game date: {current_date.strftime('%B %Y')}")
+print(f"⏰ Last advance: {last_advance_date.strftime('%Y-%m-%d')}")
+print(f"📆 Today: {today.strftime('%Y-%m-%d')}")
+print(f"🔧 Auto-save: Every {save_interval} seconds")
 
 # Start auto-save thread
-stop_event = threading.Event()
-auto_save_thread = threading.Thread(target=auto_save_worker, args=(stop_event,), daemon=True)
+auto_save_thread = threading.Thread(target=auto_save_worker, daemon=True)
 auto_save_thread.start()
 
+# ==================== UTILITY FUNCTIONS ====================
+
 def log_command(user_id, command):
-    """Log the last 10 commands for debugging"""
+    """Log command to history"""
     if "command_history" not in state:
         state["command_history"] = []
     
@@ -133,430 +156,692 @@ def log_command(user_id, command):
         "timestamp": datetime.now(EST).isoformat()
     })
     
-    # Keep only last 10 commands
-    if len(state["command_history"]) > 10:
-        state["command_history"] = state["command_history"][-10:]
+    # Keep only last 50 commands
+    if len(state["command_history"]) > 50:
+        state["command_history"] = state["command_history"][-50:]
     
-    save_state_internal()
+    if state.get("settings", {}).get("auto_save", True):
+        save_state()
+
+def log_advancement(days_missed, months_advanced, old_date, new_date):
+    """Log advancement to history"""
+    if "advancement_history" not in state:
+        state["advancement_history"] = []
+    
+    state["advancement_history"].append({
+        "timestamp": datetime.now(EST).isoformat(),
+        "days_missed": days_missed,
+        "months_advanced": months_advanced,
+        "old_date": old_date.isoformat(),
+        "new_date": new_date.isoformat(),
+        "type": "auto" if days_missed > 1 else "scheduled"
+    })
+    
+    # Keep only last 100 advancements
+    if len(state["advancement_history"]) > 100:
+        state["advancement_history"] = state["advancement_history"][-100:]
 
 def approximate_current_date(base_date, reference_time):
     """
-    Approximate the current date based on a reference time.
-    
-    Args:
-        base_date: The date at the start of the period (datetime)
-        reference_time: Current real-world time (datetime)
-    
-    Returns:
-        Approximated current date (datetime)
+    Calculate current approximation within the month
+    Returns: Current approximated datetime
     """
-    # Calculate how far we are through the current day
-    day_progress = (reference_time.hour * 3600 + reference_time.minute * 60 + reference_time.second) / 86400.0
+    # Calculate progress through day (0.0 to 1.0)
+    seconds_in_day = reference_time.hour * 3600 + reference_time.minute * 60 + reference_time.second
+    day_progress = seconds_in_day / 86400.0
     
-    # For simplicity, assume each month has 30 days
+    # Assume 30 days per month for approximation
     days_into_month = day_progress * 30
     
-    # Create the approximated date
+    # Calculate exact date
     approximated_date = base_date + timedelta(days=days_into_month)
     
     return approximated_date
 
-def format_time(dt, time_format="12hr"):
-    """Format time in 12hr or 24hr format"""
+def format_time(dt, time_format=None):
+    """Format time according to user preference"""
+    if time_format is None:
+        time_format = state.get("time_format", "12hr")
+    
     if time_format == "24hr":
-        return dt.strftime("%H:%M")
+        return dt.strftime("%H:%M:%S")
     else:
-        return dt.strftime("%I:%M %p")
+        return dt.strftime("%I:%M:%S %p")
 
-async def get_advance_channel(client):
-    """Get the advance notification channel with proper permissions check"""
-    if not ADVANCE_CHANNEL_ID:
-        print("⚠️ No advance channel ID set")
+def format_date_long(dt):
+    """Format date in long readable form"""
+    return dt.strftime("%A, %B %d, %Y")
+
+def calculate_time_until(target_time):
+    """Calculate time until a target time"""
+    now = datetime.now(EST)
+    if target_time <= now:
+        target_time += timedelta(days=1)
+    
+    time_diff = target_time - now
+    total_seconds = int(time_diff.total_seconds())
+    
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    
+    return hours, minutes, seconds
+
+async def get_notification_channel(client):
+    """Get the notification channel with proper checks"""
+    if not CHANNEL_ID:
         return None
     
     try:
-        channel = client.get_channel(ADVANCE_CHANNEL_ID)
+        channel = client.get_channel(CHANNEL_ID)
         if channel is None:
-            # Try to fetch it if not in cache
             try:
-                channel = await client.fetch_channel(ADVANCE_CHANNEL_ID)
+                channel = await client.fetch_channel(CHANNEL_ID)
             except:
-                print(f"❌ Cannot fetch channel {ADVANCE_CHANNEL_ID}")
                 return None
         
-        # Check if bot has permission to send messages
+        # Check permissions
         if isinstance(channel, discord.TextChannel):
             permissions = channel.permissions_for(channel.guild.me)
             if not permissions.send_messages:
-                print(f"❌ No permission to send messages in #{channel.name}")
+                print(f"❌ No send permission in #{channel.name}")
                 return None
         
-        print(f"✅ Advance channel: #{channel.name} (ID: {channel.id})")
         return channel
     except Exception as e:
-        print(f"❌ Error getting channel {ADVANCE_CHANNEL_ID}: {e}")
+        print(f"❌ Error getting channel: {e}")
         return None
 
-async def check_and_advance_date(client):
-    """Check if we need to advance the date and do it if needed"""
+# ==================== ADVANCEMENT LOGIC ====================
+
+async def check_and_advance_date(client, notification_channel=None):
+    """
+    Check if date needs advancement and perform it
+    Returns: (advanced, days_missed, months_advanced, new_date)
+    """
     now = datetime.now(EST)
     today = now.date()
     
-    # Get the last advance date with safe access
     last_advance_str = state.get("last_advance_date", today.isoformat())
     last_advance = datetime.fromisoformat(last_advance_str).date()
     
-    # Calculate days missed (including today if we haven't advanced yet)
     days_missed = (today - last_advance).days
     
-    # DEBUG: Log current status
-    print(f"🔍 CHECK: Now: {now.strftime('%Y-%m-%d %H:%M:%S EST')}")
-    print(f"🔍 CHECK: Today: {today}")
-    print(f"🔍 CHECK: Last advance: {last_advance}")
-    print(f"🔍 CHECK: Days missed: {days_missed}")
+    if state.get("settings", {}).get("debug_mode", False):
+        print(f"🔍 DEBUG Advance Check:")
+        print(f"   Last advance: {last_advance}")
+        print(f"   Today: {today}")
+        print(f"   Days missed: {days_missed}")
+        print(f"   Current time: {now.strftime('%H:%M:%S EST')}")
     
-    # We should advance if we haven't advanced today yet AND we've missed at least 1 day
-    should_advance = (
-        last_advance < today and  # Haven't advanced today
-        days_missed > 0           # Actually missed days
-    )
-    
-    print(f"🔍 CHECK: Should advance: {should_advance}")
-    
-    if should_advance:
-        print(f"🚨 MIDNIGHT ADVANCE TRIGGERED! Days missed: {days_missed}")
+    # Advance if we've missed days
+    if days_missed > 0:
+        print(f"🚀 ADVANCE NEEDED: {days_missed} day(s) missed")
         
-        # Calculate months to advance (4 months per day missed, max 12)
-        months_to_advance = min(4 * days_missed, 12)
+        # Calculate advancement
+        months_per_day = state.get("settings", {}).get("months_per_day", 4)
+        max_per_run = state.get("settings", {}).get("max_advance_per_run", 12)
+        months_to_advance = min(months_per_day * days_missed, max_per_run)
         
-        # Get current date with safe access
         current_date_str = state.get("current_date", now.isoformat())
         current = datetime.fromisoformat(current_date_str)
         new_date = current + relativedelta(months=months_to_advance)
+        
+        # Log before updating
+        log_advancement(days_missed, months_to_advance, current, new_date)
         
         # Update state
         state["current_date"] = new_date.isoformat()
         state["last_advance_date"] = today.isoformat()
         state["last_check_timestamp"] = now.isoformat()
-        save_state_internal()
         
-        print(f"📈 Advanced from {current.strftime('%B %Y')} to {new_date.strftime('%B %Y')}")
+        if state.get("settings", {}).get("auto_save", True):
+            save_state()
         
-        # Get the advance channel
-        advance_channel = await get_advance_channel(client)
+        print(f"📈 ADVANCED: {current.strftime('%B %Y')} → {new_date.strftime('%B %Y')}")
+        print(f"   Months: {months_to_advance}")
+        print(f"   Real days: {days_missed}")
         
-        # Send notification if channel is available and notifications are enabled
-        if advance_channel and state.get("notifications_enabled", True):
+        # Send notification
+        if notification_channel and state.get("notifications_enabled", True):
             try:
-                message = (
-                    f"**Government Time Advancement**\n"
-                    f"Real days passed: **{days_missed}**\n"
-                    f"In-game months advanced: **{months_to_advance}**\n"
-                    f"New in-game date: **{new_date.strftime('%B %Y')}** (EST)\n"
-                    f"Time: {now.strftime('%I:%M:%S %p EST')}"
-                )
-                await advance_channel.send(message)
-                print(f"📢 Notification sent to #{advance_channel.name}")
+                if days_missed == 1:
+                    message = (
+                        f"**📜 Government Time Advancement**\n"
+                        f"⏱️ **1 real day** has passed\n"
+                        f"📅 Advanced by **{months_to_advance}** in-game months\n"
+                        f"🗓️ New in-game date: **{new_date.strftime('%B %Y')}**\n"
+                        f"⏰ Time: {now.strftime('%I:%M:%S %p EST')}\n"
+                        f"────────────────────"
+                    )
+                else:
+                    remaining_days = days_missed - (months_to_advance // months_per_day)
+                    message = (
+                        f"**📜 Government Time Advancement**\n"
+                        f"⏱️ Real days passed: **{days_missed}**\n"
+                        f"📅 In-game months advanced: **{months_to_advance}**\n"
+                        f"🗓️ New in-game date: **{new_date.strftime('%B %Y')}**\n"
+                        f"⏰ Time: {now.strftime('%I:%M:%S %p EST')}\n"
+                    )
+                    if remaining_days > 0:
+                        message += f"📝 *Note: {remaining_days} day(s) will advance tomorrow*\n"
+                    message += "────────────────────"
+                
+                await notification_channel.send(message)
+                print(f"📢 Notification sent to channel")
             except discord.Forbidden:
-                print(f"❌ No permission to send messages in #{advance_channel.name}")
-            except discord.HTTPException as e:
+                print(f"❌ No permission to send in channel")
+            except Exception as e:
                 print(f"❌ Failed to send notification: {e}")
-        elif not advance_channel:
-            print(f"⚠️ No advance channel available")
-        elif not state.get("notifications_enabled", True):
-            print(f"🔕 Notifications disabled")
         
         return True, days_missed, months_to_advance, new_date
-    else:
-        # Update last check timestamp
-        state["last_check_timestamp"] = now.isoformat()
-        
-        # Log why we're not advancing
-        if last_advance == today:
-            print(f"ℹ️ Already advanced today at {last_advance}")
-        elif days_missed == 0:
-            print(f"ℹ️ No days missed (same day)")
-        else:
-            print(f"ℹ️ Not advancing: last_advance={last_advance}, today={today}")
-        
-        save_state_internal()
-        return False, 0, 0, None
+    
+    # Update timestamp even if no advancement
+    state["last_check_timestamp"] = now.isoformat()
+    if state.get("settings", {}).get("auto_save", True):
+        save_state()
+    
+    return False, 0, 0, None
 
-# Discord bot setup
+# ==================== DISCORD BOT ====================
+
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
 
 class GovernmentBot(discord.Client):
-    def __init__(self, intents):
+    def __init__(self):
         super().__init__(intents=intents)
-        self.advance_channel = None
+        self.notification_channel = None
+        self.start_time = datetime.now(EST)
         
     async def on_ready(self):
         print("=" * 60)
-        print(f"Connected as {self.user}")
-        print(f"Bot ID: {self.user.id}")
-        
-        # Safe access to state values
-        current_date_str = state.get("current_date", datetime.now(EST).isoformat())
-        last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
-        
-        current_date = datetime.fromisoformat(current_date_str)
-        last_advance = datetime.fromisoformat(last_advance_str).date()
-        
-        print(f"Current date: {current_date.strftime('%B %Y')}")
-        print(f"Last advance: {last_advance.strftime('%Y-%m-%d')}")
-        print(f"Today: {datetime.now(EST).date().strftime('%Y-%m-%d')}")
-        print(f"Auto-save: Every {save_interval} seconds")
+        print(f"✅ BOT CONNECTED: {self.user}")
+        print(f"🆔 Bot ID: {self.user.id}")
+        print(f"⏰ Start time: {self.start_time.strftime('%Y-%m-%d %H:%M:%S EST')}")
+        print(f"🌐 Servers: {len(self.guilds)}")
         print("=" * 60)
         
-        # Get the advance channel
-        self.advance_channel = await get_advance_channel(self)
+        # Get current state
+        current = datetime.fromisoformat(state.get("current_date", datetime.now(EST).isoformat()))
+        last_adv = datetime.fromisoformat(state.get("last_advance_date", datetime.now(EST).date().isoformat())).date()
         
-        await self.change_presence(activity=discord.Activity(
-            type=discord.ActivityType.watching,
-            name="the calendar | !date"
-        ))
+        print(f"📅 Current date: {current.strftime('%B %Y')}")
+        print(f"⏰ Last advance: {last_adv.strftime('%Y-%m-%d')}")
+        print(f"🔔 Notifications: {'✅ ON' if state.get('notifications_enabled', True) else '❌ OFF'}")
         
-        # Check and perform auto-advance immediately on startup
-        print("Checking for missed advancements...")
-        now = datetime.now(EST)
-        print(f"Current time: {now.strftime('%Y-%m-%d %H:%M:%S EST')}")
-        
-        advanced, days_missed, months_advanced, new_date = await check_and_advance_date(self)
-        if advanced:
-            print(f"✅ Auto-advance completed: {days_missed} days -> {months_advanced} months")
-            print(f"✅ New date: {new_date.strftime('%B %Y')}")
+        # Get notification channel
+        self.notification_channel = await get_notification_channel(self)
+        if self.notification_channel:
+            print(f"📢 Notification channel: #{self.notification_channel.name}")
         else:
-            print("⏭️ No advancement needed at this time")
+            print(f"⚠️ No notification channel or no permissions")
+        
+        # Set bot status
+        await self.change_presence(
+            activity=discord.Activity(
+                type=discord.ActivityType.watching,
+                name=f"{current.strftime('%B %Y')} | !help"
+            )
+        )
+        
+        # Check for advancements
+        print("🔍 Checking for missed advancements...")
+        advanced, days_missed, months_advanced, new_date = await check_and_advance_date(
+            self, self.notification_channel
+        )
+        
+        if advanced:
+            print(f"✅ Auto-advance completed: {months_advanced} months")
+            # Update status with new date
+            await self.change_presence(
+                activity=discord.Activity(
+                    type=discord.ActivityType.watching,
+                    name=f"{new_date.strftime('%B %Y')} | !help"
+                )
+            )
+        else:
+            print("⏭️ No advancement needed")
+        
+        print("=" * 60)
         
     async def on_message(self, message):
+        # Ignore bot messages
         if message.author.bot:
             return
-            
-        # Log the command
+        
+        # Log command
         log_command(message.author.id, message.content)
-        print(f"[{message.author}] {message.content}")
         
-        # ===== MAIN COMMANDS =====
+        # Debug logging
+        if state.get("settings", {}).get("debug_mode", False):
+            print(f"[DEBUG] {message.author} in #{message.channel}: {message.content}")
+        else:
+            print(f"[{message.author}]: {message.content}")
         
+        # ==================== COMMAND HANDLING ====================
+        
+        # !date - Show current date
         if message.content == "!date":
-            # Safe access to state values
-            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
-            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
-            
-            base_date = datetime.fromisoformat(current_date_str)
-            last_advance = datetime.fromisoformat(last_advance_str).date()
+            current = datetime.fromisoformat(state["current_date"])
             now = datetime.now(EST)
+            approx_date = approximate_current_date(current, now)
             time_fmt = state.get("time_format", "12hr")
             
-            # Calculate approximated current date
-            approx_date = approximate_current_date(base_date, now)
+            last_adv = datetime.fromisoformat(state["last_advance_date"]).date()
+            days_since = (now.date() - last_adv).days
             
-            # Calculate time until next advancement (midnight)
+            # Calculate next midnight
             next_midnight = datetime.combine(now.date() + timedelta(days=1), dt_time(0, 0, tzinfo=EST))
-            time_until = next_midnight - now
-            hours_until = time_until.seconds // 3600
-            minutes_until = (time_until.seconds % 3600) // 60
+            hours, minutes, seconds = calculate_time_until(next_midnight)
             
-            # Calculate days since last advance
-            days_since_last = (now.date() - last_advance).days
-            
-            # Format the response
             response = (
-                f"**Current Date:**\n"
-                f"Base Period: {base_date.strftime('%B %Y')}\n"
-                f"Current Approximation: {approx_date.strftime('%B %d, %Y')}\n"
-                f"Real Time: {format_time(now, time_fmt)} EST\n"
+                f"**📅 Current Date Information**\n"
+                f"────────────────────\n"
+                f"🗓️ **Base Period:** {current.strftime('%B %Y')}\n"
+                f"📆 **Current Approximation:** {approx_date.strftime('%B %d, %Y')}\n"
+                f"⏰ **Real Time:** {format_time(now, time_fmt)} EST\n"
                 f"\n"
-                f"**Advancement Info:**\n"
-                f"Last Advance: {last_advance.strftime('%Y-%m-%d')} ({days_since_last} day{'s' if days_since_last != 1 else ''} ago)\n"
-                f"Next Auto-Advance: {hours_until}h {minutes_until}m\n"
-                f"Rate: 4 in-game months per real day\n"
+                f"**⚙️ Advancement Status**\n"
+                f"────────────────────\n"
+                f"📊 **Last Advance:** {last_adv.strftime('%Y-%m-%d')} ({days_since} day{'s' if days_since != 1 else ''} ago)\n"
+                f"⏱️ **Next Auto-Advance:** {hours}h {minutes}m {seconds}s\n"
+                f"📈 **Rate:** {state.get('settings', {}).get('months_per_day', 4)} months per real day\n"
+                f"🔧 **Max per run:** {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
                 f"\n"
-                f"The date progresses through {base_date.strftime('%B %Y')} in real-time."
+                f"The date progresses through {current.strftime('%B %Y')} in real-time."
             )
             await message.channel.send(response)
             
+        # !advance [months] - Manual advance (admin)
         elif message.content.startswith("!advance"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("You are not authorized to use this command.")
+                await message.channel.send("❌ You are not authorized to use this command.")
                 return
             
-            # Check for custom advancement amount
             parts = message.content.split()
-            months_to_advance = 4  # Default
+            months_to_advance = state.get("settings", {}).get("months_per_day", 4)
             
-            if len(parts) > 1 and parts[1].isdigit():
-                months_to_advance = int(parts[1])
-                # Limit to reasonable amount
-                months_to_advance = min(max(1, months_to_advance), 48)
-                
-            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
-            current = datetime.fromisoformat(current_date_str)
+            if len(parts) > 1:
+                try:
+                    months_to_advance = int(parts[1])
+                    # Limit to reasonable amount
+                    max_months = state.get("settings", {}).get("max_advance_per_run", 12) * 3
+                    months_to_advance = min(max(1, months_to_advance), max_months)
+                except ValueError:
+                    await message.channel.send("❌ Invalid number. Usage: `!advance [months]`")
+                    return
+            
+            current = datetime.fromisoformat(state["current_date"])
             new_date = current + relativedelta(months=months_to_advance)
             
+            # Log the manual advancement
+            log_advancement(0, months_to_advance, current, new_date)
+            
+            # Update state
             state["current_date"] = new_date.isoformat()
             state["last_advance_date"] = datetime.now(EST).date().isoformat()
-            save_state_internal()
+            save_state()
             
-            await message.channel.send(
-                f"Manual advance complete.\n"
-                f"Advanced by: **{months_to_advance}** month(s)\n"
-                f"New base period: **{new_date.strftime('%B %Y')}**\n"
-                f"Next auto-advance: Tomorrow at midnight EST"
+            # Update bot status
+            await self.change_presence(
+                activity=discord.Activity(
+                    type=discord.ActivityType.watching,
+                    name=f"{new_date.strftime('%B %Y')} | !help"
+                )
             )
             
-        elif message.content == "!force-advance":
-            # Force an advance check (admin only)
+            response = (
+                f"✅ **Manual Advance Complete**\n"
+                f"────────────────────\n"
+                f"📈 **Advanced by:** {months_to_advance} month{'s' if months_to_advance != 1 else ''}\n"
+                f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
+                f"⏰ **Time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}\n"
+                f"👤 **By:** {message.author.mention}\n"
+                f"\n"
+                f"Next auto-advance will occur at midnight EST."
+            )
+            await message.channel.send(response)
+            
+        # !force - Force advance check (admin)
+        elif message.content == "!force":
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("You are not authorized to use this command.")
+                await message.channel.send("❌ You are not authorized to use this command.")
                 return
-                
-            await message.channel.send("Force checking for advancements...")
-            advanced, days_missed, months_advanced, new_date = await check_and_advance_date(self)
+            
+            await message.channel.send("🔍 Force checking for advancements...")
+            advanced, days_missed, months_advanced, new_date = await check_and_advance_date(
+                self, message.channel
+            )
             
             if advanced:
-                await message.channel.send(
-                    f"✅ Force advance completed!\n"
-                    f"Days missed: **{days_missed}**\n"
-                    f"Months advanced: **{months_advanced}**\n"
-                    f"New date: **{new_date.strftime('%B %Y')}**"
+                response = (
+                    f"✅ **Force Advance Completed**\n"
+                    f"────────────────────\n"
+                    f"⏱️ **Days missed:** {days_missed}\n"
+                    f"📈 **Months advanced:** {months_advanced}\n"
+                    f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
+                    f"⏰ **Time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
                 )
             else:
-                await message.channel.send(
-                    f"⏭️ No advancement needed.\n"
-                    f"Last advance: {state.get('last_advance_date', 'unknown')}\n"
-                    f"Today: {datetime.now(EST).date().strftime('%Y-%m-%d')}"
+                last_adv = datetime.fromisoformat(state["last_advance_date"]).date()
+                response = (
+                    f"⏭️ **No Advancement Needed**\n"
+                    f"────────────────────\n"
+                    f"📊 **Last advance:** {last_adv.strftime('%Y-%m-%d')}\n"
+                    f"📆 **Today:** {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
+                    f"⏰ **Current time:** {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
                 )
-                
-        elif message.content == "!ping":
-            # Calculate uptime approximation
-            now = datetime.now(EST)
-            minute_of_hour = now.minute
-            uptime_minutes = minute_of_hour % 30
-            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
-            last_advance = datetime.fromisoformat(last_advance_str).strftime('%Y-%m-%d')
             
-            await message.channel.send(
-                f"**Bot Status**\n"
-                f"Online\n"
-                f"Current uptime: ~{uptime_minutes} minutes\n"
-                f"Last advance: {last_advance}\n"
-                f"Next restart: in {30 - uptime_minutes} minutes"
-            )
+            await message.channel.send(response)
             
-        elif message.content == "!status":
-            # Safe access to state values
-            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
-            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
-            
-            current = datetime.fromisoformat(current_date_str)
-            last_advance = datetime.fromisoformat(last_advance_str).date()
-            now_date = datetime.now(EST).date()
-            days_since = (now_date - last_advance).days
-            
-            # Calculate next advancement time
-            next_midnight = datetime.combine(now_date + timedelta(days=1), dt_time(0, 0, tzinfo=EST))
-            time_until = next_midnight - datetime.now(EST)
-            hours_until = time_until.seconds // 3600
-            minutes_until = (time_until.seconds % 3600) // 60
-            
-            # Calculate when next advance will occur
-            next_advance_date = last_advance + timedelta(days=1)
-            next_advance_days = (next_advance_date - now_date).days
-            
-            status_msg = (
-                f"**Bot Status**\n"
-                f"Current Base Period: {current.strftime('%B %Y')}\n"
-                f"Last Auto-Advance: {last_advance.strftime('%Y-%m-%d')}\n"
-                f"Days since last advance: {days_since}\n"
-                f"Next Auto-Advance: {'Today' if next_advance_days == 0 else f'In {next_advance_days} day(s)'}\n"
-                f"Time until midnight: {hours_until}h {minutes_until}m\n"
-                f"Notifications: {'✅ Enabled' if state.get('notifications_enabled', True) else '❌ Disabled'}\n"
-                f"Time Format: {state.get('time_format', '12hr')}"
-            )
-            await message.channel.send(status_msg)
-            
-        elif message.content == "!debug":
+        # !setdate <Month> <Year> - Set custom date (admin)
+        elif message.content.startswith("!setdate"):
             if message.author.id != ADMIN_USER_ID:
-                await message.channel.send("Only administrators can view debug information.")
+                await message.channel.send("❌ You are not authorized to use this command.")
                 return
+            
+            parts = message.content.split()
+            if len(parts) != 3:
+                await message.channel.send(
+                    "❌ **Usage:** `!setdate <Month> <Year>`\n"
+                    "**Example:** `!setdate May 2026`\n"
+                    "**Example:** `!setdate December 2027`"
+                )
+                return
+            
+            try:
+                month_name = parts[1]
+                year = int(parts[2])
                 
-            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
-            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
-            last_check_str = state.get("last_check_timestamp", datetime.now(EST).isoformat())
+                # Parse month
+                month_num = datetime.strptime(month_name, "%B").month
+                new_date = datetime(year, month_num, 1, tzinfo=EST)
+                
+                # Get old date for logging
+                old_date = datetime.fromisoformat(state["current_date"])
+                
+                # Update state
+                state["current_date"] = new_date.isoformat()
+                state["last_advance_date"] = datetime.now(EST).date().isoformat()
+                save_state()
+                
+                # Update bot status
+                await self.change_presence(
+                    activity=discord.Activity(
+                        type=discord.ActivityType.watching,
+                        name=f"{new_date.strftime('%B %Y')} | !help"
+                    )
+                )
+                
+                response = (
+                    f"✅ **Date Successfully Set**\n"
+                    f"────────────────────\n"
+                    f"🗓️ **New date:** {new_date.strftime('%B %Y')}\n"
+                    f"📊 **Previous date:** {old_date.strftime('%B %Y')}\n"
+                    f"⏰ **Last advance reset to:** {datetime.now(EST).date().strftime('%Y-%m-%d')}\n"
+                    f"👤 **By:** {message.author.mention}"
+                )
+                await message.channel.send(response)
+                
+            except ValueError:
+                await message.channel.send(
+                    "❌ **Invalid date format.**\n"
+                    "**Valid months:** January, February, March, April, May, June, July, "
+                    "August, September, October, November, December\n"
+                    "**Example:** `!setdate May 2026`"
+                )
+                
+        # !status - Bot status
+        elif message.content == "!status":
+            current = datetime.fromisoformat(state["current_date"])
+            last_adv = datetime.fromisoformat(state["last_advance_date"]).date()
+            today = datetime.now(EST).date()
+            days_since = (today - last_adv).days
             
-            current = datetime.fromisoformat(current_date_str)
-            last_advance = datetime.fromisoformat(last_advance_str).date()
-            last_check = datetime.fromisoformat(last_check_str)
-            now = datetime.now(EST)
+            # Calculate next midnight
+            next_midnight = datetime.combine(today + timedelta(days=1), dt_time(0, 0, tzinfo=EST))
+            hours, minutes, seconds = calculate_time_until(next_midnight)
             
-            days_missed = (now.date() - last_advance).days
-            should_advance = (
-                last_advance < now.date() and
-                days_missed > 0
+            # Calculate uptime
+            uptime = datetime.now(EST) - self.start_time
+            uptime_str = f"{uptime.days}d {uptime.seconds//3600}h {(uptime.seconds%3600)//60}m"
+            
+            response = (
+                f"**🤖 Bot Status**\n"
+                f"────────────────────\n"
+                f"🤖 **Bot:** {self.user}\n"
+                f"🆔 **ID:** {self.user.id}\n"
+                f"⏰ **Uptime:** {uptime_str}\n"
+                f"🌐 **Servers:** {len(self.guilds)}\n"
+                f"\n"
+                f"**📅 Date Status**\n"
+                f"────────────────────\n"
+                f"🗓️ **Current date:** {current.strftime('%B %Y')}\n"
+                f"📊 **Last advance:** {last_adv.strftime('%Y-%m-%d')}\n"
+                f"⏱️ **Days since advance:** {days_since}\n"
+                f"🕛 **Next auto-advance:** {hours}h {minutes}m {seconds}s\n"
+                f"\n"
+                f"**🔧 Settings**\n"
+                f"────────────────────\n"
+                f"🔔 **Notifications:** {'✅ ON' if state.get('notifications_enabled', True) else '❌ OFF'}\n"
+                f"⏰ **Time format:** {state.get('time_format', '12hr')}\n"
+                f"📈 **Rate:** {state.get('settings', {}).get('months_per_day', 4)} months/day\n"
+                f"⚡ **Max/run:** {state.get('settings', {}).get('max_advance_per_run', 12)} months\n"
+                f"💾 **Auto-save:** {'✅ ON' if state.get('settings', {}).get('auto_save', True) else '❌ OFF'}\n"
+                f"\n"
+                f"**👑 Admin:** <@{ADMIN_USER_ID}>"
             )
+            await message.channel.send(response)
             
-            debug_info = (
-                f"**Debug Information**\n"
-                f"Current Date: {current.strftime('%B %Y')}\n"
-                f"Last Advance Date: {last_advance.strftime('%Y-%m-%d')}\n"
-                f"Current Date: {now.date().strftime('%Y-%m-%d')}\n"
-                f"Current Time: {now.strftime('%H:%M:%S EST')}\n"
-                f"Days missed: {days_missed}\n"
-                f"Should advance now: {'✅ YES' if should_advance else '❌ NO'}\n"
-                f"Advance channel ID: {ADVANCE_CHANNEL_ID}\n"
-                f"Last Check: {last_check.strftime('%Y-%m-%d %H:%M:%S')}\n"
-                f"State keys: {', '.join(state.keys())}"
-            )
-            await message.channel.send(debug_info)
+        # !notifications [on/off] - Toggle notifications (admin)
+        elif message.content.startswith("!notifications"):
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("❌ You are not authorized to use this command.")
+                return
             
-        elif message.content == "!save" and message.author.id == ADMIN_USER_ID:
-            saved = save_state_internal()
-            if saved:
-                await message.channel.send("State saved successfully.")
+            parts = message.content.split()
+            if len(parts) > 1:
+                setting = parts[1].lower()
+                if setting in ["on", "enable", "yes", "true"]:
+                    state["notifications_enabled"] = True
+                    response = "✅ Notifications **ENABLED**"
+                elif setting in ["off", "disable", "no", "false"]:
+                    state["notifications_enabled"] = False
+                    response = "🔕 Notifications **DISABLED**"
+                else:
+                    response = f"❌ Invalid setting. Use `!notifications on` or `!notifications off`"
             else:
-                await message.channel.send("Failed to save state.")
-                
-        elif message.content == "!lastsave" and message.author.id == ADMIN_USER_ID:
-            last_save_str = datetime.fromtimestamp(last_save_time).strftime('%Y-%m-%d %H:%M:%S')
-            await message.channel.send(f"Last save: {last_save_str}")
+                # Toggle
+                current = state.get("notifications_enabled", True)
+                state["notifications_enabled"] = not current
+                response = f"🔔 Notifications **{'ENABLED' if not current else 'DISABLED'}**"
             
+            save_state()
+            await message.channel.send(response)
+            
+        # !timeformat [12hr/24hr] - Change time format
+        elif message.content.startswith("!timeformat"):
+            parts = message.content.split()
+            if len(parts) > 1:
+                new_format = parts[1].lower()
+                if new_format in ["12hr", "12", "12h"]:
+                    state["time_format"] = "12hr"
+                    response = "🕐 Time format set to **12-hour** (AM/PM)"
+                elif new_format in ["24hr", "24", "24h"]:
+                    state["time_format"] = "24hr"
+                    response = "🕐 Time format set to **24-hour**"
+                else:
+                    response = "❌ Invalid format. Use `12hr` or `24hr`"
+            else:
+                # Toggle
+                current = state.get("time_format", "12hr")
+                state["time_format"] = "24hr" if current == "12hr" else "12hr"
+                response = f"🕐 Time format changed to **{state['time_format']}**"
+            
+            save_state()
+            await message.channel.send(response)
+            
+        # !save - Manual save
+        elif message.content == "!save":
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("❌ You are not authorized to use this command.")
+                return
+            
+            if save_state():
+                last_save = datetime.fromtimestamp(last_save_time).strftime('%Y-%m-%d %H:%M:%S')
+                await message.channel.send(f"✅ State saved successfully at {last_save}")
+            else:
+                await message.channel.send("❌ Failed to save state")
+                
+        # !debug [on/off] - Toggle debug mode (admin)
+        elif message.content.startswith("!debug"):
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("❌ You are not authorized to use this command.")
+                return
+            
+            if "settings" not in state:
+                state["settings"] = {}
+            
+            parts = message.content.split()
+            if len(parts) > 1:
+                setting = parts[1].lower()
+                if setting in ["on", "enable", "yes", "true"]:
+                    state["settings"]["debug_mode"] = True
+                    response = "🐛 Debug mode **ENABLED**"
+                elif setting in ["off", "disable", "no", "false"]:
+                    state["settings"]["debug_mode"] = False
+                    response = "🐛 Debug mode **DISABLED**"
+                else:
+                    current = state["settings"].get("debug_mode", False)
+                    response = f"🐛 Debug mode is currently **{'ENABLED' if current else 'DISABLED'}**"
+            else:
+                # Toggle
+                current = state["settings"].get("debug_mode", False)
+                state["settings"]["debug_mode"] = not current
+                response = f"🐛 Debug mode **{'ENABLED' if not current else 'DISABLED'}**"
+            
+            save_state()
+            await message.channel.send(response)
+            
+        # !history [commands/advances] - View history (admin)
+        elif message.content.startswith("!history"):
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("❌ You are not authorized to use this command.")
+                return
+            
+            parts = message.content.split()
+            history_type = "commands" if len(parts) < 2 else parts[1].lower()
+            
+            if history_type in ["cmd", "commands", "command"]:
+                history = state.get("command_history", [])
+                if not history:
+                    await message.channel.send("📭 No command history recorded.")
+                    return
+                
+                # Show last 10 commands
+                recent = history[-10:]
+                response = "**📜 Recent Commands (Last 10)**\n────────────────────\n"
+                for entry in recent:
+                    dt = datetime.fromisoformat(entry["timestamp"])
+                    response += f"• <t:{int(dt.timestamp())}:R> - <@{entry['user']}>: `{entry['command']}`\n"
+                
+            elif history_type in ["adv", "advance", "advances", "advancement"]:
+                history = state.get("advancement_history", [])
+                if not history:
+                    await message.channel.send("📭 No advancement history recorded.")
+                    return
+                
+                # Show last 5 advancements
+                recent = history[-5:]
+                response = "**📈 Recent Advancements (Last 5)**\n────────────────────\n"
+                for entry in recent:
+                    dt = datetime.fromisoformat(entry["timestamp"])
+                    old_date = datetime.fromisoformat(entry["old_date"])
+                    new_date = datetime.fromisoformat(entry["new_date"])
+                    response += (
+                        f"• <t:{int(dt.timestamp())}:R>\n"
+                        f"  {old_date.strftime('%B %Y')} → {new_date.strftime('%B %Y')}\n"
+                        f"  {entry['months_advanced']} months ({entry['days_missed']} days)\n"
+                        f"  Type: {entry['type']}\n"
+                    )
+            else:
+                response = "❌ Invalid history type. Use `!history commands` or `!history advances`"
+            
+            await message.channel.send(response)
+            
+        # !ping - Check latency
+        elif message.content == "!ping":
+            latency = round(self.latency * 1000, 2)
+            await message.channel.send(f"🏓 Pong! Latency: **{latency}ms**")
+            
+        # !help - Show help
         elif message.content == "!help":
-            await message.channel.send(
-                "**Main Commands:**\n"
-                "`!date` - Show current approximated date\n"
-                "`!status` - Bot status and settings\n"
-                "`!debug` - Debug information (admin)\n"
-                "`!ping` - Check bot responsiveness\n"
-                "`!advance [months]` - Advance by months (admin, default: 4)\n"
-                "`!force-advance` - Force auto-advance check (admin)\n"
-                "`!save` - Manually save state (admin)\n"
-                "`!lastsave` - Show last save time (admin)\n"
-                "`!help` - Show this message\n"
+            response = (
+                "**🤖 Government Date Bot - Help**\n"
+                "────────────────────\n"
+                "**📅 Date Commands:**\n"
+                "`!date` - Show current date information\n"
+                "`!status` - Show bot status\n"
+                "`!ping` - Check bot latency\n"
                 "\n"
-                f"Admin: <@{ADMIN_USER_ID}>"
+                "**👑 Admin Commands:**\n"
+                "`!advance [months]` - Manually advance date\n"
+                "`!force` - Force auto-advance check\n"
+                "`!setdate <Month> <Year>` - Set custom date\n"
+                "`!notifications [on/off]` - Toggle notifications\n"
+                "`!timeformat [12hr/24hr]` - Change time format\n"
+                "`!save` - Manually save state\n"
+                "`!debug [on/off]` - Toggle debug mode\n"
+                "`!history [commands/advances]` - View history\n"
+                "\n"
+                "**⚙️ Settings:**\n"
+                "• Auto-advance: 4 months per real day at midnight EST\n"
+                "• Max advance per run: 12 months\n"
+                "• Date progresses in real-time through each month\n"
+                "\n"
+                f"**Admin:** <@{ADMIN_USER_ID}>"
+            )
+            await message.channel.send(response)
+            
+        # Unknown command
+        elif message.content.startswith("!"):
+            await message.channel.send(
+                f"❓ Unknown command. Type `!help` for available commands.\n"
+                f"Did you mean `!date` or `!status`?"
             )
 
-# Run bot
+# ==================== MAIN EXECUTION ====================
+
 if __name__ == "__main__":
     try:
-        bot = GovernmentBot(intents=intents)
+        bot = GovernmentBot()
         
-        # Save state on shutdown
+        # Clean shutdown handler
         import atexit
         def shutdown():
-            print("🛑 Shutting down...")
+            print("\n" + "=" * 60)
+            print("🛑 Shutting down bot...")
             stop_event.set()
-            auto_save_thread.join(timeout=5)
-            save_state_internal()
+            if auto_save_thread:
+                auto_save_thread.join(timeout=5)
+            save_state()
             print("✅ Shutdown complete")
+            print("=" * 60)
         
         atexit.register(shutdown)
         
+        print("🚀 Starting bot...")
         bot.run(TOKEN)
         
+    except discord.LoginFailure:
+        print("❌ ERROR: Invalid Discord token!")
+    except KeyboardInterrupt:
+        print("\n⏹️ Bot stopped by user")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ ERROR: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         shutdown()
