@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 CHANNEL_ID = int(os.getenv("DISCORD_CHANNEL_ID", 0))
+ADVANCE_CHANNEL_ID = CHANNEL_ID  # Explicit variable for clarity
 ADMIN_USER_ID = 1367955172373823629
 DATA_FILE = "gov_state.json"
 EST = ZoneInfo("America/New_York")
@@ -18,7 +19,8 @@ print("=" * 60)
 print("Government Date Bot - Online")
 print("=" * 60)
 print(f"Token: {'Present' if TOKEN else 'Missing'}")
-print(f"Channel ID: {CHANNEL_ID}")
+print(f"Advance Channel ID: {ADVANCE_CHANNEL_ID}")
+print(f"Admin User ID: {ADMIN_USER_ID}")
 
 # Global state and save lock
 state = {}
@@ -113,6 +115,7 @@ last_advance_date = datetime.fromisoformat(state.get("last_advance_date", dateti
 
 print(f"Current in-game date: {current_date.strftime('%B %Y')}")
 print(f"Last advance date: {last_advance_date.strftime('%Y-%m-%d')}")
+print(f"Today's date: {datetime.now(EST).date().strftime('%Y-%m-%d')}")
 
 # Start auto-save thread
 stop_event = threading.Event()
@@ -165,7 +168,36 @@ def format_time(dt, time_format="12hr"):
     else:
         return dt.strftime("%I:%M %p")
 
-async def check_and_advance_date(channel):
+async def get_advance_channel(client):
+    """Get the advance notification channel with proper permissions check"""
+    if not ADVANCE_CHANNEL_ID:
+        print("⚠️ No advance channel ID set")
+        return None
+    
+    try:
+        channel = client.get_channel(ADVANCE_CHANNEL_ID)
+        if channel is None:
+            # Try to fetch it if not in cache
+            try:
+                channel = await client.fetch_channel(ADVANCE_CHANNEL_ID)
+            except:
+                print(f"❌ Cannot fetch channel {ADVANCE_CHANNEL_ID}")
+                return None
+        
+        # Check if bot has permission to send messages
+        if isinstance(channel, discord.TextChannel):
+            permissions = channel.permissions_for(channel.guild.me)
+            if not permissions.send_messages:
+                print(f"❌ No permission to send messages in #{channel.name}")
+                return None
+        
+        print(f"✅ Advance channel: #{channel.name} (ID: {channel.id})")
+        return channel
+    except Exception as e:
+        print(f"❌ Error getting channel {ADVANCE_CHANNEL_ID}: {e}")
+        return None
+
+async def check_and_advance_date(client):
     """Check if we need to advance the date and do it if needed"""
     now = datetime.now(EST)
     today = now.date()
@@ -174,25 +206,25 @@ async def check_and_advance_date(channel):
     last_advance_str = state.get("last_advance_date", today.isoformat())
     last_advance = datetime.fromisoformat(last_advance_str).date()
     
-    # Get the last check timestamp
-    last_check_str = state.get("last_check_timestamp", now.isoformat())
-    last_check = datetime.fromisoformat(last_check_str)
-    
-    # Only advance if:
-    # 1. It's past midnight (hour 0-1)
-    # 2. AND we haven't advanced today yet
-    # 3. AND last advance was yesterday or earlier
-    should_advance = (
-        now.time().hour == 0 and 
-        now.time().minute <= 1 and
-        last_advance < today
-    )
-    
-    # Also check if we missed any days (bot was offline)
+    # Calculate days missed (including today if we haven't advanced yet)
     days_missed = (today - last_advance).days
     
-    if should_advance and days_missed > 0:
-        print(f"Midnight detected. Days since last advance: {days_missed}")
+    # DEBUG: Log current status
+    print(f"🔍 CHECK: Now: {now.strftime('%Y-%m-%d %H:%M:%S EST')}")
+    print(f"🔍 CHECK: Today: {today}")
+    print(f"🔍 CHECK: Last advance: {last_advance}")
+    print(f"🔍 CHECK: Days missed: {days_missed}")
+    
+    # We should advance if we haven't advanced today yet AND we've missed at least 1 day
+    should_advance = (
+        last_advance < today and  # Haven't advanced today
+        days_missed > 0           # Actually missed days
+    )
+    
+    print(f"🔍 CHECK: Should advance: {should_advance}")
+    
+    if should_advance:
+        print(f"🚨 MIDNIGHT ADVANCE TRIGGERED! Days missed: {days_missed}")
         
         # Calculate months to advance (4 months per day missed, max 12)
         months_to_advance = min(4 * days_missed, 12)
@@ -208,31 +240,47 @@ async def check_and_advance_date(channel):
         state["last_check_timestamp"] = now.isoformat()
         save_state_internal()
         
-        print(f"Advanced from {current.strftime('%B %Y')} to {new_date.strftime('%B %Y')}")
+        print(f"📈 Advanced from {current.strftime('%B %Y')} to {new_date.strftime('%B %Y')}")
+        
+        # Get the advance channel
+        advance_channel = await get_advance_channel(client)
         
         # Send notification if channel is available and notifications are enabled
-        if channel and state.get("notifications_enabled", True):
-            await channel.send(
-                f"**Government Time Advancement**\n"
-                f"Real days passed: **{days_missed}**\n"
-                f"In-game months advanced: **{months_to_advance}**\n"
-                f"New in-game date: **{new_date.strftime('%B %Y')}** (EST)"
-            )
+        if advance_channel and state.get("notifications_enabled", True):
+            try:
+                message = (
+                    f"**Government Time Advancement**\n"
+                    f"Real days passed: **{days_missed}**\n"
+                    f"In-game months advanced: **{months_to_advance}**\n"
+                    f"New in-game date: **{new_date.strftime('%B %Y')}** (EST)\n"
+                    f"Time: {now.strftime('%I:%M:%S %p EST')}"
+                )
+                await advance_channel.send(message)
+                print(f"📢 Notification sent to #{advance_channel.name}")
+            except discord.Forbidden:
+                print(f"❌ No permission to send messages in #{advance_channel.name}")
+            except discord.HTTPException as e:
+                print(f"❌ Failed to send notification: {e}")
+        elif not advance_channel:
+            print(f"⚠️ No advance channel available")
+        elif not state.get("notifications_enabled", True):
+            print(f"🔕 Notifications disabled")
         
-        return True, days_missed, months_to_advance
+        return True, days_missed, months_to_advance, new_date
     else:
         # Update last check timestamp
         state["last_check_timestamp"] = now.isoformat()
         
-        # If it's midnight but we already advanced today, just log it
-        if now.time().hour == 0 and now.time().minute <= 1:
-            if last_advance == today:
-                print(f"Already advanced today at {state.get('last_check_timestamp', 'unknown')}")
-            else:
-                print(f"Not midnight yet or already advanced. Last advance: {last_advance}")
+        # Log why we're not advancing
+        if last_advance == today:
+            print(f"ℹ️ Already advanced today at {last_advance}")
+        elif days_missed == 0:
+            print(f"ℹ️ No days missed (same day)")
+        else:
+            print(f"ℹ️ Not advancing: last_advance={last_advance}, today={today}")
         
         save_state_internal()
-        return False, 0, 0
+        return False, 0, 0, None
 
 # Discord bot setup
 intents = discord.Intents.default()
@@ -246,6 +294,7 @@ class GovernmentBot(discord.Client):
     async def on_ready(self):
         print("=" * 60)
         print(f"Connected as {self.user}")
+        print(f"Bot ID: {self.user.id}")
         
         # Safe access to state values
         current_date_str = state.get("current_date", datetime.now(EST).isoformat())
@@ -256,18 +305,12 @@ class GovernmentBot(discord.Client):
         
         print(f"Current date: {current_date.strftime('%B %Y')}")
         print(f"Last advance: {last_advance.strftime('%Y-%m-%d')}")
+        print(f"Today: {datetime.now(EST).date().strftime('%Y-%m-%d')}")
         print(f"Auto-save: Every {save_interval} seconds")
         print("=" * 60)
         
-        # Get the notification channel
-        if CHANNEL_ID:
-            self.advance_channel = self.get_channel(CHANNEL_ID)
-            if self.advance_channel:
-                print(f"Notification channel: #{self.advance_channel.name}")
-            else:
-                print(f"Channel {CHANNEL_ID} not found")
-        else:
-            print("No channel ID set - auto-advance notifications disabled")
+        # Get the advance channel
+        self.advance_channel = await get_advance_channel(self)
         
         await self.change_presence(activity=discord.Activity(
             type=discord.ActivityType.watching,
@@ -279,11 +322,12 @@ class GovernmentBot(discord.Client):
         now = datetime.now(EST)
         print(f"Current time: {now.strftime('%Y-%m-%d %H:%M:%S EST')}")
         
-        advanced, days_missed, months_advanced = await check_and_advance_date(self.advance_channel)
+        advanced, days_missed, months_advanced, new_date = await check_and_advance_date(self)
         if advanced:
-            print(f"Auto-advance completed: {days_missed} days -> {months_advanced} months")
+            print(f"✅ Auto-advance completed: {days_missed} days -> {months_advanced} months")
+            print(f"✅ New date: {new_date.strftime('%B %Y')}")
         else:
-            print("No advancement needed at this time")
+            print("⏭️ No advancement needed at this time")
         
     async def on_message(self, message):
         if message.author.bot:
@@ -362,6 +406,29 @@ class GovernmentBot(discord.Client):
                 f"Next auto-advance: Tomorrow at midnight EST"
             )
             
+        elif message.content == "!force-advance":
+            # Force an advance check (admin only)
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("You are not authorized to use this command.")
+                return
+                
+            await message.channel.send("Force checking for advancements...")
+            advanced, days_missed, months_advanced, new_date = await check_and_advance_date(self)
+            
+            if advanced:
+                await message.channel.send(
+                    f"✅ Force advance completed!\n"
+                    f"Days missed: **{days_missed}**\n"
+                    f"Months advanced: **{months_advanced}**\n"
+                    f"New date: **{new_date.strftime('%B %Y')}**"
+                )
+            else:
+                await message.channel.send(
+                    f"⏭️ No advancement needed.\n"
+                    f"Last advance: {state.get('last_advance_date', 'unknown')}\n"
+                    f"Today: {datetime.now(EST).date().strftime('%Y-%m-%d')}"
+                )
+                
         elif message.content == "!ping":
             # Calculate uptime approximation
             now = datetime.now(EST)
@@ -410,6 +477,40 @@ class GovernmentBot(discord.Client):
             )
             await message.channel.send(status_msg)
             
+        elif message.content == "!debug":
+            if message.author.id != ADMIN_USER_ID:
+                await message.channel.send("Only administrators can view debug information.")
+                return
+                
+            current_date_str = state.get("current_date", datetime.now(EST).isoformat())
+            last_advance_str = state.get("last_advance_date", datetime.now(EST).date().isoformat())
+            last_check_str = state.get("last_check_timestamp", datetime.now(EST).isoformat())
+            
+            current = datetime.fromisoformat(current_date_str)
+            last_advance = datetime.fromisoformat(last_advance_str).date()
+            last_check = datetime.fromisoformat(last_check_str)
+            now = datetime.now(EST)
+            
+            days_missed = (now.date() - last_advance).days
+            should_advance = (
+                last_advance < now.date() and
+                days_missed > 0
+            )
+            
+            debug_info = (
+                f"**Debug Information**\n"
+                f"Current Date: {current.strftime('%B %Y')}\n"
+                f"Last Advance Date: {last_advance.strftime('%Y-%m-%d')}\n"
+                f"Current Date: {now.date().strftime('%Y-%m-%d')}\n"
+                f"Current Time: {now.strftime('%H:%M:%S EST')}\n"
+                f"Days missed: {days_missed}\n"
+                f"Should advance now: {'✅ YES' if should_advance else '❌ NO'}\n"
+                f"Advance channel ID: {ADVANCE_CHANNEL_ID}\n"
+                f"Last Check: {last_check.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                f"State keys: {', '.join(state.keys())}"
+            )
+            await message.channel.send(debug_info)
+            
         elif message.content == "!save" and message.author.id == ADMIN_USER_ID:
             saved = save_state_internal()
             if saved:
@@ -426,10 +527,13 @@ class GovernmentBot(discord.Client):
                 "**Main Commands:**\n"
                 "`!date` - Show current approximated date\n"
                 "`!status` - Bot status and settings\n"
+                "`!debug` - Debug information (admin)\n"
                 "`!ping` - Check bot responsiveness\n"
                 "`!advance [months]` - Advance by months (admin, default: 4)\n"
+                "`!force-advance` - Force auto-advance check (admin)\n"
                 "`!save` - Manually save state (admin)\n"
                 "`!lastsave` - Show last save time (admin)\n"
+                "`!help` - Show this message\n"
                 "\n"
                 f"Admin: <@{ADMIN_USER_ID}>"
             )
@@ -442,16 +546,17 @@ if __name__ == "__main__":
         # Save state on shutdown
         import atexit
         def shutdown():
+            print("🛑 Shutting down...")
             stop_event.set()
             auto_save_thread.join(timeout=5)
             save_state_internal()
-            print("Bot shutdown complete")
+            print("✅ Shutdown complete")
         
         atexit.register(shutdown)
         
         bot.run(TOKEN)
         
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"❌ Error: {e}")
     finally:
         shutdown()
