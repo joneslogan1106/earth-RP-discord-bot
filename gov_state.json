@@ -1,7 +1,7 @@
 {
   "current_date": "2026-08-01T00:00:00-04:00",
   "last_advance_date": "2026-02-02",
-  "last_check_timestamp": "2026-02-02T22:44:10.980891-05:00",
+  "last_check_timestamp": "2026-02-02T22:56:02.630189-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
@@ -34,6 +34,51 @@
       "user": "1367955172373823629",
       "command": "!date",
       "timestamp": "2026-02-02T22:46:04.599455-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-02T22:57:08.999321-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-02T22:57:54.062457-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "<@1115754475332837528> That's correct right?",
+      "timestamp": "2026-02-02T22:58:04.147778-05:00"
+    },
+    {
+      "user": "631060907417534464",
+      "command": "Algeria Germany arms Deal\nGermany will sell the following equipment to Algeria at a total price of $20 billion and have delivery by 2031\n\n-500 x tpz fuch 2\n-100k x Infanterist der Zukunft Tier A\n\n||<@1449879806924816430> ||",
+      "timestamp": "2026-02-02T23:05:43.051989-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-02T23:06:02.460543-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!help",
+      "timestamp": "2026-02-02T23:06:22.636783-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!ping",
+      "timestamp": "2026-02-02T23:06:37.024271-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!notifications on",
+      "timestamp": "2026-02-02T23:06:54.882053-05:00"
+    },
+    {
+      "user": "559273678110457857",
+      "command": "Gm when",
+      "timestamp": "2026-02-02T23:12:19.637264-05:00"
     }
   ],
   "advancement_history": [
