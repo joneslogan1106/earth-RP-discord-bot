@@ -2,31 +2,34 @@ name: Government Date Bot
 
 on:
   schedule:
-    # Run every 25 minutes (GitHub Actions free tier)
+    # Run every 25 minutes (stays under GitHub's 30-min free limit)
     - cron: '*/25 * * * *'
     
     # Midnight EST checks (covers both EST/EDT)
     - cron: '55 3 * * *'   # 23:55 EST (3:55 UTC)
-    - cron: '0 4 * * *'    # 00:00 EDT (4:00 UTC) - Mar to Nov
+    - cron: '0 4 * * *'    # 00:00 EDT (4:00 UTC) - March to November
     - cron: '5 4 * * *'    # 00:05 EDT (4:05 UTC)
-    - cron: '0 5 * * *'    # 00:00 EST (5:00 UTC) - Nov to Mar
+    - cron: '0 5 * * *'    # 00:00 EST (5:00 UTC) - November to March
     - cron: '5 5 * * *'    # 00:05 EST (5:05 UTC)
     
-  # Allow manual trigger
+  # Allow manual runs
   workflow_dispatch:
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 24  # Stop after 24 minutes
+    
+    # Grant write permissions to the GITHUB_TOKEN
+    permissions:
+      contents: write
     
     steps:
-    # Step 1: Checkout code with write permissions
+    # Step 1: Checkout with write permissions
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 0  # Get all history
+        fetch-depth: 0  # Get all history for proper git operations
         
     # Step 2: Setup Python
     - name: Setup Python
@@ -36,85 +39,116 @@ jobs:
         
     # Step 3: Install dependencies
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: |
+        pip install discord.py python-dateutil
+        echo "✅ Dependencies installed"
         
-    # Step 4: Show current state before run
+    # Step 4: Show current state
     - name: Show current state
       run: |
-        echo "=== Current State Before Run ==="
+        echo "=== CURRENT STATE ==="
         if [ -f gov_state.json ]; then
-          echo "State file exists"
-          echo "Current date:"
-          grep -o '"current_date": "[^"]*"' gov_state.json || echo "Not found"
-          echo "Last advance:"
-          grep -o '"last_advance_date": "[^"]*"' gov_state.json || echo "Not found"
+          echo "📄 State file exists"
+          echo "📅 Current date:"
+          grep -o '"current_date": "[^"]*"' gov_state.json || echo "  Not found"
+          echo "⏰ Last advance:"
+          grep -o '"last_advance_date": "[^"]*"' gov_state.json || echo "  Not found"
+          echo "🔧 Settings:"
+          grep -o '"settings": {[^}]*}' gov_state.json || echo "  Not found"
         else
-          echo "No state file found"
+          echo "📄 No state file - will create new one"
         fi
-        echo "================================"
+        echo "====================="
         
-    # Step 5: Run the Discord bot
+    # Step 5: Run Discord Bot
     - name: Run Discord Bot
       env:
         DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
       run: |
-        echo "🤖 Starting Government Date Bot..."
-        echo "⏰ Current UTC: $(date -u)"
-        echo "⏰ Current EST: $(TZ=America/New_York date)"
-        echo "📅 Auto-advance at midnight EST"
-        echo "💾 Auto-save every 60 seconds"
+        echo "🤖 STARTING GOVERNMENT DATE BOT"
+        echo "================================"
+        echo "⏰ UTC Time: $(date -u)"
+        echo "⏰ EST Time: $(TZ=America/New_York date)"
+        echo "📅 Schedule: Runs every 25 minutes"
+        echo "🕛 Auto-advance: Midnight EST daily"
+        echo "💾 Auto-save: Every 60 seconds"
+        echo "================================"
         
-        # Run the bot for 23 minutes
-        timeout 1380 python bot.py
+        # Run bot for 22 minutes (leaves time for git operations)
+        timeout 1320 python bot.py
         
         echo "🔄 Run completed - will restart in next scheduled job"
         
-    # Step 6: Commit and push state changes (ALWAYS runs, even on timeout)
-    - name: Commit and push state changes
-      if: always()  # Critical: Run even if previous steps fail/timeout
+    # Step 6: Save state changes to git (ALWAYS runs)
+    - name: Save state changes
+      if: always()  # Critical: Run even if previous step fails or times out
+      env:
+        # Use the automatically provided GITHUB_TOKEN
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "💾 Saving state changes to git..."
+        echo "💾 SAVING STATE CHANGES"
+        echo "========================"
         
-        # Configure git
+        # Configure git with proper identity
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
         
-        # Check if state file exists and has changes
-        if [ -f gov_state.json ]; then
-          echo "Checking for changes in state file..."
-          
-          # Show git status
-          git status --porcelain gov_state.json
-          
-          # If there are changes, commit and push
-          if [[ -n $(git status --porcelain gov_state.json) ]]; then
-            echo "Changes detected, committing..."
-            git add gov_state.json
-            git commit -m "🤖 Auto-save bot state - $(date +'%Y-%m-%d %H:%M:%S EST')"
-            
-            echo "Pushing to repository..."
-            git push
-            
-            echo "✅ State saved and pushed to repository"
-            echo "Commit hash: $(git rev-parse --short HEAD)"
-          else
-            echo "📭 No changes to state file"
-          fi
-        else
-          echo "❌ State file not found - cannot save"
+        # Check if state file exists
+        if [ ! -f gov_state.json ]; then
+          echo "❌ ERROR: State file not found after bot run!"
+          exit 1
         fi
+        
+        echo "📄 State file exists, checking for changes..."
+        
+        # Show git status
+        echo "Git status:"
+        git status --porcelain gov_state.json
+        
+        # Check if file has been modified
+        if [[ -n $(git status --porcelain gov_state.json) ]]; then
+          echo "✅ Changes detected in state file"
+          
+          # Show what changed
+          echo "Changes:"
+          git diff --stat gov_state.json || echo "No diff available"
+          
+          # Stage changes
+          echo "Staging changes..."
+          git add gov_state.json
+          
+          # Commit changes
+          echo "Creating commit..."
+          commit_msg="🤖 Auto-save bot state - $(date +'%Y-%m-%d %H:%M:%S EST')"
+          git commit -m "$commit_msg"
+          
+          # Push changes
+          echo "Pushing to repository..."
+          git push
+          
+          echo "✅ State successfully saved and pushed to repository"
+          echo "📝 Commit: $(git log --oneline -1)"
+        else
+          echo "📭 No changes to state file"
+        fi
+        
+        echo "========================"
         
     # Step 7: Show final state
     - name: Show final state
       if: always()
       run: |
-        echo "=== Final State ==="
+        echo "=== FINAL STATE ==="
         if [ -f gov_state.json ]; then
-          echo "State file preserved"
-          echo "Current date:"
-          grep -o '"current_date": "[^"]*"' gov_state.json || echo "Not found"
-          echo "Last advance:"
-          grep -o '"last_advance_date": "[^"]*"' gov_state.json || echo "Not found"
+          echo "📄 State file preserved"
+          echo "📅 Current date:"
+          grep -o '"current_date": "[^"]*"' gov_state.json || echo "  Not found"
+          echo "⏰ Last advance:"
+          grep -o '"last_advance_date": "[^"]*"' gov_state.json || echo "  Not found"
+          echo "🔧 Auto-save: $(grep -q '"auto_save": true' gov_state.json && echo '✅ ON' || echo '❌ OFF')"
+          echo "🔔 Notifications: $(grep -q '"notifications_enabled": true' gov_state.json && echo '✅ ON' || echo '❌ OFF')"
+        else
+          echo "❌ ERROR: State file missing!"
         fi
         echo "==================="
