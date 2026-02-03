@@ -1,25 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T13:36:18.486735-05:00",
+  "last_check_timestamp": "2026-02-03T14:35:00.821908-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "833778296630149140",
-      "command": "Yes",
-      "timestamp": "2026-02-03T10:51:56.447726-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Alright",
-      "timestamp": "2026-02-03T10:52:04.772992-05:00"
-    },
-    {
-      "user": "1292788883079168073",
-      "command": "If we don\u2019t speak up about it,it might end up in our own doorstep",
-      "timestamp": "2026-02-03T10:52:13.637790-05:00"
-    },
     {
       "user": "1115754475332837528",
       "command": "Thank you sir",
@@ -254,6 +239,21 @@
       "user": "559273678110457857",
       "command": "Gm when",
       "timestamp": "2026-02-03T13:50:53.010890-05:00"
+    },
+    {
+      "user": "1246130327701815379",
+      "command": "Idk why the word \"green\" looks like german empire in its prime",
+      "timestamp": "2026-02-03T14:48:16.009172-05:00"
+    },
+    {
+      "user": "1246130327701815379",
+      "command": "Ok no im schizophrenic",
+      "timestamp": "2026-02-03T14:48:48.823187-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-03T14:55:16.415391-05:00"
     }
   ],
   "advancement_history": [
