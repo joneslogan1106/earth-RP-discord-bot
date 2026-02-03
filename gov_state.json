@@ -1,20 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T11:34:52.466817-05:00",
+  "last_check_timestamp": "2026-02-03T12:38:37.147374-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1292788883079168073",
-      "command": "Oh I can see is about politics oh year good",
-      "timestamp": "2026-02-03T10:46:49.133261-05:00"
-    },
-    {
-      "user": "591636548731273216",
-      "command": "Basically, this a 2025 NRP server",
-      "timestamp": "2026-02-03T10:47:03.350674-05:00"
-    },
     {
       "user": "1292788883079168073",
       "command": "Can I drop my opinions too?",
@@ -254,6 +244,16 @@
       "user": "1246130327701815379",
       "command": "",
       "timestamp": "2026-02-03T11:43:54.047343-05:00"
+    },
+    {
+      "user": "920641989291151410",
+      "command": "Such as?",
+      "timestamp": "2026-02-03T12:55:08.169400-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "O",
+      "timestamp": "2026-02-03T12:56:44.338541-05:00"
     }
   ],
   "advancement_history": [
