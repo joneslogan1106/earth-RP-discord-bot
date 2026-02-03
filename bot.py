@@ -512,7 +512,7 @@ class GovernmentBot(discord.Client):
             
             await message.channel.send("Force checking for advancements...")
             advanced, days_missed, months_advanced, new_date = await check_and_advance_date(
-                self, message.channel
+                self, message.channel  # Use command channel
             )
             
             if advanced:
@@ -534,8 +534,8 @@ class GovernmentBot(discord.Client):
                     f"Current time: {datetime.now(EST).strftime('%I:%M:%S %p EST')}"
                 )
             
-            await message.channel.send(response)
-            
+            await message.channel.send(response)  # Always post response here
+                    
         # !setdate <Month> <Year> - Set custom date (admin)
         elif message.content.startswith("!setdate"):
             if message.author.id != ADMIN_USER_ID:
