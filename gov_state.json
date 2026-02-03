@@ -1,7 +1,7 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T00:00:29.310989-05:00",
+  "last_check_timestamp": "2026-02-03T00:05:55.623320-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
@@ -129,6 +129,26 @@
       "user": "1367955172373823629",
       "command": "!setdate December 2026",
       "timestamp": "2026-02-03T00:01:47.449604-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!force",
+      "timestamp": "2026-02-03T00:05:38.429568-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!setdate August 2026",
+      "timestamp": "2026-02-03T00:05:50.601228-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!force",
+      "timestamp": "2026-02-03T00:05:55.334226-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!setdate December 2026",
+      "timestamp": "2026-02-03T00:06:11.874438-05:00"
     }
   ],
   "advancement_history": [
