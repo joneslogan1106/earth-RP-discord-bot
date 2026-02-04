@@ -1,25 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T18:20:38.532304-05:00",
+  "last_check_timestamp": "2026-02-03T18:46:45.788336-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "You said use AI",
-      "timestamp": "2026-02-03T16:42:19.148592-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "So I did",
-      "timestamp": "2026-02-03T16:42:21.110525-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "Show me",
-      "timestamp": "2026-02-03T16:42:24.209559-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "\ud83d\ude2d",
@@ -254,6 +239,21 @@
       "user": "1276210518171975823",
       "command": "How do they get to do that",
       "timestamp": "2026-02-03T18:42:24.702281-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "If you wished for Slovakian reunion, my recommendation is doing an election where a charismatic pro-union candidate wins (with at least 8-12 months of campaigning and events that boost popularity before hand) as your first step <@1276210518171975823>",
+      "timestamp": "2026-02-03T18:47:23.101532-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "s?m",
+      "timestamp": "2026-02-03T18:49:31.036947-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Need to pump up that activity",
+      "timestamp": "2026-02-03T18:49:47.169867-05:00"
     }
   ],
   "advancement_history": [
