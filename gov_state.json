@@ -1,230 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T08:50:05.256275-05:00",
+  "last_check_timestamp": "2026-02-04T09:33:03.270289-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "742932199191347242",
-      "command": "On like day 3 or smth for me",
-      "timestamp": "2026-02-03T21:46:25.338561-05:00"
-    },
-    {
-      "user": "860609867592630292",
-      "command": "",
-      "timestamp": "2026-02-03T23:38:06.394059-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-03T23:59:34.271378-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-03T23:59:52.888488-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-03T23:59:59.710596-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-04T00:00:03.590124-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!help",
-      "timestamp": "2026-02-04T00:00:25.374327-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!advance 4",
-      "timestamp": "2026-02-04T00:00:36.129074-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!send",
-      "timestamp": "2026-02-04T00:00:43.362354-05:00"
-    },
-    {
-      "user": "1355984934224793882",
-      "command": "",
-      "timestamp": "2026-02-04T00:14:19.799044-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "Cannot GM this due to my posiiton in the RP",
-      "timestamp": "2026-02-04T00:29:06.959799-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Ok",
-      "timestamp": "2026-02-04T00:29:45.634875-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "I will try to get someone on it, as I'm going through the entire queue",
-      "timestamp": "2026-02-04T00:30:10.768612-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "It\u2019s all good man",
-      "timestamp": "2026-02-04T00:30:22.357175-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "Alr thx",
-      "timestamp": "2026-02-04T00:30:37.771966-05:00"
-    },
-    {
-      "user": "1287230350879359048",
-      "command": "",
-      "timestamp": "2026-02-04T01:03:52.626300-05:00"
-    },
-    {
-      "user": "817360995197648947",
-      "command": "",
-      "timestamp": "2026-02-04T03:29:50.953030-05:00"
-    },
-    {
-      "user": "301380599451746305",
-      "command": "||# Preventing Division of Syria ||\n\n\n> ||Israel is attempting to divide Syria through Kurdish Druze and Alawites with Mossad instigating things in Suwayda Governorate. This is plain and simple unacceptable for the Turkish Republic so National Intelligence Agency will begin Operation Desert Spring in order to weaken the Druze movements in Suwayda Region||\n\n> ||We begin a smear campaign against Al-Hijri the leader of Druze Rebellion in the area. The Campaign will be conducted both in online and in the ground by our agent. The Campaign will focus on Al-Hijri's support for Assad during the civil war until 2021 and his earlier support for Syrian Unity in 2025 until Mossad hired him. We show him as a weak indecisive leader who supports the highest bidder instead good of Druze People. His armed gangs also attacked both the Syrian Government and Druze's in Suwayda who opposed him.||\n\n> ||Pro Government Druze Groups in Suwayda will get a $60 Million worth of Support from National Intelligence with Trucks, Assault Rifles and Heavy weapons being supplied to them. The regions desert terrain makes delivery of these weapons easy.||\n\n> ||While the weapon deliveries are happening Turkish Intelligence Agency will leak these deliveries of weapons to the Druze Rebel Leader in Suwayda Forcing him to act against these rebels. This will create the chaos necessary in Suwayda for the Government forces to intervene and take control of the region from Al Hijri.||",
-      "timestamp": "2026-02-04T05:13:21.443015-05:00"
-    },
-    {
-      "user": "301380599451746305",
-      "command": "<@1096877344221831220> be preparead",
-      "timestamp": "2026-02-04T05:13:25.022960-05:00"
-    },
-    {
-      "user": "301380599451746305",
-      "command": "https://discord.com/channels/1465148715902959782/1465159015129415952/1468549987611705488\n\nDid the Suwayda region which is defacto controlled by Druze Rebels started a conflict with Pro-GOvernment Druze Groups",
-      "timestamp": "2026-02-04T05:15:02.915663-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "who the **fuck** says ): instead of \ud83d\ude41",
-      "timestamp": "2026-02-04T07:11:45.638164-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(without the space",
-      "timestamp": "2026-02-04T07:12:03.247399-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "I\u2019m off to go to work but when I\u2019m back from work I\u2019m clearing the GM log, de-role-ing inactives, resigning as South Korea to focus on running the server",
-      "timestamp": "2026-02-04T07:26:03.292476-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "I might RP Chile and just return to centrist normalcy.",
-      "timestamp": "2026-02-04T07:26:09.650414-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Kast will fuck things up.",
-      "timestamp": "2026-02-04T07:26:33.521165-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Oh, that's the server you told me about on VC lol",
-      "timestamp": "2026-02-04T07:27:26.372899-05:00"
-    },
-    {
-      "user": "824647964911075379",
-      "command": "no",
-      "timestamp": "2026-02-04T07:27:37.477555-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "The one you said you're Japan?",
-      "timestamp": "2026-02-04T07:27:54.174661-05:00"
-    },
-    {
-      "user": "824647964911075379",
-      "command": "ohhh",
-      "timestamp": "2026-02-04T07:27:59.422048-05:00"
-    },
-    {
-      "user": "824647964911075379",
-      "command": "yeahh",
-      "timestamp": "2026-02-04T07:28:01.219000-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Given Brazil is led by an ape IRP (Lula), RPing Chile might off-set that.",
-      "timestamp": "2026-02-04T07:28:54.996906-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "<@&1465501764634546267> big announcement coming when I get back home \n\nThis is also a good time to say if you\u2019ve been inactive from roleplay your job is at risk today because I\u2019m gonna do an activity check when I get home",
-      "timestamp": "2026-02-04T07:32:20.751512-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "# \ud83c\uddf7\ud83c\uddf4 __ROM\u00c2NIA | ROMANIA__ \ud83c\uddf7\ud83c\uddf4\n\n``MINISTERUL JUSTITIEI`` \n\n\n> *Following the extremely controversial murder of a 15 year old boy by a 13 year old (alongside two other), which has led to many to call for minors that normally wouldn't answer to the law, to do so just as any other; a petition which has gotten over 300,000 signatures so far calls for this change in the law, in response, the Ministry of Justice has announced that, the boy who committed the murder will answer to the law as those that are at least 14 years old, and all three children who took part in the murder of the 15 year old will serve anywhere from 10 to 15 years in prison for their actions, and their records will not be possible to be clean ever again.*\n> \n> *In the same idea, a recent trend which has sparked intense responses, of women being seemingly purposelessly murdered and/or harassed, mostly by former partners, because they have not been guided properly on how protection services work, etc. This has ultimately led to femicides being classed as a separate type of murder, and would also class police agents, etc. that have failed to properly respond to such an emergency as accomplices. Over the last year, over 50 such cases of senseless murder have been reported, and the special forces of the Romanian police have been given the task to, alongside normal units, arrest those responsible until the trial concludes, and from there, based on the evidence and actions, would be given sentences of anywhere from 15-25 years in jail, with no possibility for parole or pardons under any circumstance. They would also have to wear ankle bracelets so the police knows their exact location at any time. The President has stated that efforts, both through the educational system, and the justice system, will be made to eradicate this plague of senseless violence, and punishments will be adapted. Anyone at their second offense would spend at least 25 years in jail.*",
-      "timestamp": "2026-02-04T07:32:36.377139-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "<@&1465158772967211029> (sorry for the second ping) activity check today",
-      "timestamp": "2026-02-04T07:34:00.171945-05:00"
-    },
-    {
-      "user": "689448093191897139",
-      "command": "hi",
-      "timestamp": "2026-02-04T07:34:16.292136-05:00"
-    },
-    {
-      "user": "689448093191897139",
-      "command": "i got alot of free time now so can rp later today",
-      "timestamp": "2026-02-04T07:34:33.677364-05:00"
-    },
-    {
-      "user": "531740795020247040",
-      "command": "I might as well get deroled because I actually become so uninterested in modern RP because they become the same mess.",
-      "timestamp": "2026-02-04T07:38:00.628627-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Oh...i presume you kind of \"abandoned\" most nation roleplays?",
-      "timestamp": "2026-02-04T07:38:52.340488-05:00"
-    },
-    {
-      "user": "531740795020247040",
-      "command": "except for a custom one, I\u2019m trying out pretty much.",
-      "timestamp": "2026-02-04T07:39:28.700500-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Oh, which custom one if you don't mind showing me on DMs?",
-      "timestamp": "2026-02-04T07:40:51.845660-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "# \ud83c\uddf7\ud83c\uddf4 __ROM\u00c2NIA | ROMANIA__ \ud83c\uddf7\ud83c\uddf4\n\n``MINISTERUL DE TRANSPORTURILOR SI INFRASTRUCTURII`` \n\n\n> *Seeing as Romania has been swift with implementing new taxes and measures to fix the economy as per EU demands and to fix the mess made by the PSD while they were in power, the country's Ministry of Transport and Infrastructure has request for <@&1465202214980161546> to once again approve the funds promised to Romania which we have lost after failing to respond in time the first time. It has stated that the funds are absolutely crucial for the development and modernization of our infrastructure and that thousands of kilometers of highways and railways are not able to be built because of the lack of funds. We also reiterate the importance of Romanian infrastructure to connect Bulgaria, Greece and Turkey to the European market. A special commission would be setup by the ANAF and DGA to ensure that all funds allocated are used as requested.*",
-      "timestamp": "2026-02-04T07:43:16.697699-05:00"
-    },
-    {
-      "user": "689448093191897139",
-      "command": "nuh uh)",
-      "timestamp": "2026-02-04T07:44:17.442918-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(ok Francistan",
-      "timestamp": "2026-02-04T07:45:36.055159-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(Emmanual bin Macron",
-      "timestamp": "2026-02-04T07:45:46.516528-05:00"
-    },
     {
       "user": "689448093191897139",
       "command": "<:bruh:1465173318029279384>",
@@ -254,6 +34,226 @@
       "user": "1367955172373823629",
       "command": "**Denmark Responds**\nGreenland has always has an American base and that can be used, but we are not allowing for our minerals to be mined by the US. Reminding that Greenland is its own sovereign Kingdom. If you\u2019d like to discuss prices for mining rights, create a meeting",
       "timestamp": "2026-02-04T08:56:12.804488-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Their oil and gas is up to and added 40% now",
+      "timestamp": "2026-02-04T09:44:43.137641-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Because they refuse to meet with you",
+      "timestamp": "2026-02-04T09:44:51.202943-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "It\u2019s insane",
+      "timestamp": "2026-02-04T09:44:57.658496-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Glory to Israel",
+      "timestamp": "2026-02-04T09:45:12.528984-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Not gonna even try",
+      "timestamp": "2026-02-04T09:45:17.140250-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "denmark also didnt understand what this post refers to https://discord.com/channels/1465148715902959782/1465158921655292111/1468602253861458065",
+      "timestamp": "2026-02-04T09:46:29.184745-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "since his response is accepting / bad",
+      "timestamp": "2026-02-04T09:46:50.631672-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Denmark seems to think that any mention of Greenland and investment means that you\u2019re stealing it from him",
+      "timestamp": "2026-02-04T09:47:16.384985-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Even when we all offered to invest",
+      "timestamp": "2026-02-04T09:47:24.694288-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "He\u2019s also taken to calling me a dictator",
+      "timestamp": "2026-02-04T09:48:09.350558-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Which is quite silly",
+      "timestamp": "2026-02-04T09:48:14.457120-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "<@1145845479234601032>",
+      "timestamp": "2026-02-04T09:48:23.785341-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "bump",
+      "timestamp": "2026-02-04T09:48:24.904756-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "<@1456761963102339246> for context",
+      "timestamp": "2026-02-04T09:48:36.420040-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "You can look through this",
+      "timestamp": "2026-02-04T09:48:42.747010-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Hi",
+      "timestamp": "2026-02-04T09:48:44.324701-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Hi",
+      "timestamp": "2026-02-04T09:48:50.175801-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Yeah, this just goes over the insurance agreement-specifically focusing on aspects where we have advantages (energy, terror, climate, and maritime) as well as focusing of reinsurance-insuring insurers",
+      "timestamp": "2026-02-04T09:49:46.804455-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Quite a low risk, plus we both can directly influence and mitigate the risk of our main coverage options through our domestic and foreign policies",
+      "timestamp": "2026-02-04T09:50:46.602072-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "So",
+      "timestamp": "2026-02-04T09:50:47.209595-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "We make a company",
+      "timestamp": "2026-02-04T09:50:49.847766-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "And",
+      "timestamp": "2026-02-04T09:51:03.807352-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "The company is made, it\u2019s pretty passive.",
+      "timestamp": "2026-02-04T09:51:05.678740-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Oh ok",
+      "timestamp": "2026-02-04T09:51:10.309752-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "So we strengthen relations economically and the other way",
+      "timestamp": "2026-02-04T09:51:34.195319-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "I can commit major investments into Greenland everything",
+      "timestamp": "2026-02-04T09:52:03.792266-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "bypassing Denmark",
+      "timestamp": "2026-02-04T09:52:07.537412-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "which is what i'll be doing",
+      "timestamp": "2026-02-04T09:52:11.680388-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "From time to time I\u2019ll just make posts for it, if you want, you can utilize it in your own negotiations; \u201cLet Saudi Aramco drill here, we have insurance backing us, we can get better rates for other businesses in the area\u201d that sort of thing. Helps us both out to expand our market reach",
+      "timestamp": "2026-02-04T09:52:43.587765-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "Plan is to leave them feeling left out",
+      "timestamp": "2026-02-04T09:52:47.949605-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Sure",
+      "timestamp": "2026-02-04T09:53:00.244515-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Wait",
+      "timestamp": "2026-02-04T09:53:08.382910-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Tho",
+      "timestamp": "2026-02-04T09:53:09.875216-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Does this give me access to Norwegian sea and kinda north Atlantic",
+      "timestamp": "2026-02-04T09:53:52.243963-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Based on the Company we bought, AXIS, which we made NORSA, it\u2019s HQed in Bermuda (like most insurers are) and it has offices in the US, UK, Switzerland, France, Singapore, Saudi Arabia, and Norway.",
+      "timestamp": "2026-02-04T09:53:59.301374-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "They only have control when it comes to defense and foreign policy so when we frame everything we do as just for civilians and economic development theyre not gonna be involved",
+      "timestamp": "2026-02-04T09:54:00.436929-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "What are you talking about",
+      "timestamp": "2026-02-04T09:54:06.943674-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "I mean like",
+      "timestamp": "2026-02-04T09:54:12.336378-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "I\u2019m talking insurance",
+      "timestamp": "2026-02-04T09:54:14.130690-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Oh ok",
+      "timestamp": "2026-02-04T09:54:18.635958-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "I thought like",
+      "timestamp": "2026-02-04T09:54:28.012228-05:00"
+    },
+    {
+      "user": "1456761963102339246",
+      "command": "Trading and stuff",
+      "timestamp": "2026-02-04T09:54:33.889248-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "I didn\u2019t give you drilling rights with Aramco, our oil companies and our wealth funds are still separate",
+      "timestamp": "2026-02-04T09:54:38.518263-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "It\u2019s just insurance",
+      "timestamp": "2026-02-04T09:54:50.834143-05:00"
     }
   ],
   "advancement_history": [
