@@ -1,185 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T18:46:45.788336-05:00",
+  "last_check_timestamp": "2026-02-03T20:48:00.406143-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "\ud83d\ude2d",
-      "timestamp": "2026-02-03T16:42:24.571386-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "Hello mister president",
-      "timestamp": "2026-02-03T16:42:25.575234-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "!purge 5",
-      "timestamp": "2026-02-03T16:42:31.958958-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "<@1145845479234601032>",
-      "timestamp": "2026-02-03T16:42:34.591507-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Hello uae",
-      "timestamp": "2026-02-03T16:42:36.694284-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "!purge 5",
-      "timestamp": "2026-02-03T16:42:45.667649-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "How are we doing?",
-      "timestamp": "2026-02-03T16:42:51.153276-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "!purge 4",
-      "timestamp": "2026-02-03T16:42:59.022545-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Good",
-      "timestamp": "2026-02-03T16:43:06.245743-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Uh",
-      "timestamp": "2026-02-03T16:43:24.986641-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "Ykw",
-      "timestamp": "2026-02-03T16:43:32.087820-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "So lets get to the point",
-      "timestamp": "2026-02-03T16:43:38.955691-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "I\u2019m just gonna say wait until a player is there to negotiate",
-      "timestamp": "2026-02-03T16:43:50.466215-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "Ok",
-      "timestamp": "2026-02-03T16:43:56.343756-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Middle east pact right?",
-      "timestamp": "2026-02-03T16:43:58.521848-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "I\u2019ll mark Slovakia as important on the new map",
-      "timestamp": "2026-02-03T16:44:02.938382-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "I did follow ur instructions",
-      "timestamp": "2026-02-03T16:44:19.547818-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "The UAE proposes a partnership to strengthen our ties in three areas: stable oil trade with a minimum floor price, expanded bilateral trade and investment, and shared technology with skilled workforce mobility. This framework will ensure predictable revenues, boost economic growth, and foster innovation for both our countries.",
-      "timestamp": "2026-02-03T16:44:20.652979-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "You did",
-      "timestamp": "2026-02-03T16:44:28.204765-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "So you get access to my oil",
-      "timestamp": "2026-02-03T16:44:53.265695-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "You just had to watch the ai closer ig",
-      "timestamp": "2026-02-03T16:45:11.852577-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "<@1456761963102339246> battle?",
-      "timestamp": "2026-02-03T16:45:19.271042-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "\ud83d\ude2d",
-      "timestamp": "2026-02-03T16:45:25.037196-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Wha",
-      "timestamp": "2026-02-03T16:45:26.225693-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "This agreement is not about giving access to your oil.",
-      "timestamp": "2026-02-03T16:45:30.733911-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "I need to prompt engineer now",
-      "timestamp": "2026-02-03T16:45:31.844736-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Idk how but ok",
-      "timestamp": "2026-02-03T16:45:32.336380-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "I have one only",
-      "timestamp": "2026-02-03T16:46:10.408971-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Then what",
-      "timestamp": "2026-02-03T16:46:22.218218-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "It is about coordinating trade and market stability, ensuring both countries benefit from predictable prices and secure supply.",
-      "timestamp": "2026-02-03T16:46:43.346533-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Aren't we already trading bro",
-      "timestamp": "2026-02-03T16:47:02.244600-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "Oh damn get more",
-      "timestamp": "2026-02-03T16:47:10.679238-05:00"
-    },
-    {
-      "user": "1229512622576242750",
-      "command": "this agreement simply strengthens and organizes our existing cooperation on oil, trade, and technology for mutual benefit.",
-      "timestamp": "2026-02-03T16:48:20.576945-05:00"
-    },
-    {
-      "user": "1276210518171975823",
-      "command": "Buddy that's what the treaty was talking about",
-      "timestamp": "2026-02-03T17:04:33.544142-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "No country on earth is gonna instantly union like that",
-      "timestamp": "2026-02-03T17:04:34.912561-05:00"
-    },
     {
       "user": "1276210518171975823",
       "command": "The treaty literally talked about the steps",
@@ -254,6 +79,181 @@
       "user": "1145845479234601032",
       "command": "Need to pump up that activity",
       "timestamp": "2026-02-03T18:49:47.169867-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Cuz I was tryna do that because I get notifications whenever it\u2019s online",
+      "timestamp": "2026-02-03T20:48:01.887407-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-03T20:48:12.869901-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "There it is",
+      "timestamp": "2026-02-03T20:48:16.186492-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Try running it",
+      "timestamp": "2026-02-03T20:48:18.929395-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "<@524016564065009674>",
+      "timestamp": "2026-02-03T20:49:05.510759-05:00"
+    },
+    {
+      "user": "524016564065009674",
+      "command": "!date",
+      "timestamp": "2026-02-03T20:49:21.342541-05:00"
+    },
+    {
+      "user": "524016564065009674",
+      "command": "in the meantime, can we get someone to gm <#1465448028310863965>",
+      "timestamp": "2026-02-03T20:56:56.485478-05:00"
+    },
+    {
+      "user": "524016564065009674",
+      "command": "submitted a move nearly 5 days ago now",
+      "timestamp": "2026-02-03T20:57:31.210814-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "I will complete it tomorrow morning I promise",
+      "timestamp": "2026-02-03T20:59:41.562419-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Hi",
+      "timestamp": "2026-02-03T20:59:57.618438-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "<@944708478113546280> supposed to be on that",
+      "timestamp": "2026-02-03T21:01:17.094358-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "I had a really busy day barely did anything else online other than working on it, but around 1/3 of the GM is ready and I pretty much know what I will be writing",
+      "timestamp": "2026-02-03T21:01:28.635472-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "Also that is a hell of a long post",
+      "timestamp": "2026-02-03T21:01:40.538543-05:00"
+    },
+    {
+      "user": "944708478113546280",
+      "command": "tomorrow morning it\u2019ll be done",
+      "timestamp": "2026-02-03T21:03:03.906905-05:00"
+    },
+    {
+      "user": "944708478113546280",
+      "command": "sorry boss",
+      "timestamp": "2026-02-03T21:03:13.754935-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "<@591636548731273216> battle?",
+      "timestamp": "2026-02-03T21:03:18.005481-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "I\u2019m going mass gm",
+      "timestamp": "2026-02-03T21:03:27.181203-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "I'd most likely lose but sure",
+      "timestamp": "2026-02-03T21:03:51.042407-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "I\u2019ll only use communist nations as a handicap",
+      "timestamp": "2026-02-03T21:04:09.178121-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "But not the Soviet Union",
+      "timestamp": "2026-02-03T21:04:13.448459-05:00"
+    },
+    {
+      "user": "584377365325676544",
+      "command": "Put me in coach\u2026",
+      "timestamp": "2026-02-03T21:05:45.840914-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "<@591636548731273216> select your balls fr",
+      "timestamp": "2026-02-03T21:05:48.669620-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "We can battle after",
+      "timestamp": "2026-02-03T21:05:58.453865-05:00"
+    },
+    {
+      "user": "584377365325676544",
+      "command": "",
+      "timestamp": "2026-02-03T21:06:04.482343-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Wow",
+      "timestamp": "2026-02-03T21:06:20.316148-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Okay can I battle unhandicapped <@591636548731273216>",
+      "timestamp": "2026-02-03T21:06:33.213837-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "Really didn't expect that result",
+      "timestamp": "2026-02-03T21:06:39.058706-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "Of course",
+      "timestamp": "2026-02-03T21:06:47.694245-05:00"
+    },
+    {
+      "user": "584377365325676544",
+      "command": "Was nato nerfed?",
+      "timestamp": "2026-02-03T21:08:08.769676-05:00"
+    },
+    {
+      "user": "584377365325676544",
+      "command": "\ud83e\uddd0",
+      "timestamp": "2026-02-03T21:08:11.099709-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "That was brutal",
+      "timestamp": "2026-02-03T21:08:49.944619-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "USSR carried in the end",
+      "timestamp": "2026-02-03T21:09:00.084472-05:00"
+    },
+    {
+      "user": "591636548731273216",
+      "command": "<@1145845479234601032> GG",
+      "timestamp": "2026-02-03T21:09:12.126790-05:00"
+    },
+    {
+      "user": "584377365325676544",
+      "command": "Lemme see rq",
+      "timestamp": "2026-02-03T21:09:27.389408-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "gg",
+      "timestamp": "2026-02-03T21:09:38.217028-05:00"
     }
   ],
   "advancement_history": [
