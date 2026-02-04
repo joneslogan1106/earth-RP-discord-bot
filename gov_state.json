@@ -1,20 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T16:25:17.811942-05:00",
+  "last_check_timestamp": "2026-02-04T16:58:57.723995-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1456761963102339246",
-      "command": "Does this give me access to Norwegian sea and kinda north Atlantic",
-      "timestamp": "2026-02-04T09:53:52.243963-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Based on the Company we bought, AXIS, which we made NORSA, it\u2019s HQed in Bermuda (like most insurers are) and it has offices in the US, UK, Switzerland, France, Singapore, Saudi Arabia, and Norway.",
-      "timestamp": "2026-02-04T09:53:59.301374-05:00"
-    },
     {
       "user": "984532331387818044",
       "command": "They only have control when it comes to defense and foreign policy so when we frame everything we do as just for civilians and economic development theyre not gonna be involved",
@@ -254,6 +244,16 @@
       "user": "1367955172373823629",
       "command": "# I AM CLEARING THE GM QUEUE RN\nAlso I have gmed some stuff just got to wait for it to be approved",
       "timestamp": "2026-02-04T16:12:19.176736-05:00"
+    },
+    {
+      "user": "742932199191347242",
+      "command": "https://discord.com/channels/1465148715902959782/1467371452238926069/1468087805187195093\nDoes all equipment get home safe (or to Algeria)?",
+      "timestamp": "2026-02-04T16:59:33.724808-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "If needed I\u2019ll step in",
+      "timestamp": "2026-02-04T17:20:30.168677-05:00"
     }
   ],
   "advancement_history": [
