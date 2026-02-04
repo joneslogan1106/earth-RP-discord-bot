@@ -1,15 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T02:33:48.523056-05:00",
+  "last_check_timestamp": "2026-02-04T03:22:38.570177-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "524016564065009674",
-      "command": "submitted a move nearly 5 days ago now",
-      "timestamp": "2026-02-03T20:57:31.210814-05:00"
-    },
     {
       "user": "591636548731273216",
       "command": "I will complete it tomorrow morning I promise",
@@ -254,6 +249,11 @@
       "user": "1287230350879359048",
       "command": "",
       "timestamp": "2026-02-04T01:03:52.626300-05:00"
+    },
+    {
+      "user": "817360995197648947",
+      "command": "",
+      "timestamp": "2026-02-04T03:29:50.953030-05:00"
     }
   ],
   "advancement_history": [
