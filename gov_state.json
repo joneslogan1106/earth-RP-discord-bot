@@ -1,20 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T15:04:43.999053-05:00",
+  "last_check_timestamp": "2026-02-04T15:55:09.793420-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1456761963102339246",
-      "command": "Wait",
-      "timestamp": "2026-02-04T09:53:08.382910-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "Tho",
-      "timestamp": "2026-02-04T09:53:09.875216-05:00"
-    },
     {
       "user": "1456761963102339246",
       "command": "Does this give me access to Norwegian sea and kinda north Atlantic",
@@ -254,6 +244,16 @@
       "user": "1145845479234601032",
       "command": "<@&1465149663169613927> someone make a separate ballsdex channel",
       "timestamp": "2026-02-04T15:17:37.766257-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "<@591636548731273216>",
+      "timestamp": "2026-02-04T15:59:21.364930-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "# I AM CLEARING THE GM QUEUE RN\nAlso I have gmed some stuff just got to wait for it to be approved",
+      "timestamp": "2026-02-04T16:12:19.176736-05:00"
     }
   ],
   "advancement_history": [
