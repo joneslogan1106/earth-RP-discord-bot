@@ -1,35 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T07:25:54.244860-05:00",
+  "last_check_timestamp": "2026-02-04T08:50:05.256275-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "559273678110457857",
-      "command": "Of being locked cuz no gm",
-      "timestamp": "2026-02-03T21:43:17.460005-05:00"
-    },
-    {
-      "user": "559273678110457857",
-      "command": "Holy",
-      "timestamp": "2026-02-03T21:43:18.430819-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "I\u2019m harassing my staff team",
-      "timestamp": "2026-02-03T21:43:36.100233-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "Very sorry",
-      "timestamp": "2026-02-03T21:43:38.079282-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "I can\u2019t gm today because busy",
-      "timestamp": "2026-02-03T21:43:48.874709-05:00"
-    },
     {
       "user": "742932199191347242",
       "command": "On like day 3 or smth for me",
@@ -254,6 +229,31 @@
       "user": "689448093191897139",
       "command": "<:bruh:1465173318029279384>",
       "timestamp": "2026-02-04T07:45:57.816017-05:00"
+    },
+    {
+      "user": "1096877344221831220",
+      "command": "|| *The Syrian Government thanks Turkey for this important contribution, and we get to work on getting ready for Israel*",
+      "timestamp": "2026-02-04T08:50:10.374368-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "I'm gonna keep implementing my policies and they're gonna gradually become bigger and more powerful until Greenland basically becomes mine without me crossing any legal barriers",
+      "timestamp": "2026-02-04T08:53:52.882034-05:00"
+    },
+    {
+      "user": "984532331387818044",
+      "command": "If they wanna discuss they should ask for a meeting and come up with good offers, every year that goes by the Chinese grow more powerful",
+      "timestamp": "2026-02-04T08:54:20.290520-05:00"
+    },
+    {
+      "user": "817360995197648947",
+      "command": "# Nation Template\n- Nation name: Arab Republic of Egypt\n- Head of State: Abdel-Fattah-al-Sisi\n- Head of Government: Mostafa Madbouly\n- Government type: Semi Presidential Republic\n- Ideology: Semi-Authoritarian Republic, Arab Nationalism\n- Currency: Egyptian Pound\n- Economy type: Mixed\n- Population: 119 Million\n- Flag: \ud83c\uddea\ud83c\uddec",
+      "timestamp": "2026-02-04T08:54:25.381022-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "**Denmark Responds**\nGreenland has always has an American base and that can be used, but we are not allowing for our minerals to be mined by the US. Reminding that Greenland is its own sovereign Kingdom. If you\u2019d like to discuss prices for mining rights, create a meeting",
+      "timestamp": "2026-02-04T08:56:12.804488-05:00"
     }
   ],
   "advancement_history": [
