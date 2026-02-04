@@ -1,135 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T17:29:48.849157-05:00",
+  "last_check_timestamp": "2026-02-04T18:00:55.589432-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "671859637015937052",
-      "command": "***2026 Defense-Tech Export Acceleration & Expo Israel Showcase***\n\n*1. Combat-Proven Systems \u2013 Immediate Export Priority List\nThe following systems, battle-tested and rapidly iterated in real operations, are now open for accelerated export:\n\nDrones & Loitering Munitions\nHeron TP / Heron 1 variants (long-endurance ISR + strike)\nHermes 900 & Hermes 450 (multi-mission, maritime strike capable)\nHarop / Harpy NG (loitering anti-radar / anti-ship)\nLancet-class tactical loitering munitions (new low-cost swarm variants)\nMini/micro-UAVs (Skylark 3, Orbiter 4, Ghost-X quadcopters)\n\nDirected Energy & Laser Systems\nIron Beam high-energy laser (short-range rocket/mortar/drone interception) \u2013 first combat intercepts 2025\nLite Beam / mobile vehicle-mounted laser effectors (counter-drone, counter-mortar)\nHigh-power laser effectors for naval platforms (Rafael / Elbit prototypes)\n\nAI Targeting & Sensor Fusion\nFire Weaver / Smart Shooter AI-assisted fire control (infantry & vehicle)\nGospel / Habsora AI target-generation system (battlefield decision support)\nNeural-based object recognition & threat prioritization (integrated into Iron Dome, David's Sling, Arrow)\nEdge-AI sensor fusion for drone swarms & C4I networks\n\nActive Protection & Countermeasure Systems\nTrophy HV / Trophy Light (Merkava, Namer, Eitan, international platforms) \u2013 95%+ intercept rate in combat\nIron Fist (light/medium vehicles)\nIron Sting precision-guided 120 mm mortar munitions\nRafael's Spike family (LR/ER/NLOS/NT-Dandy) \u2013 anti-tank & anti-structure\n\n\n2. Expo Israel 2026 \u2013 Global Showcase Event\n\nLocation: Tel Aviv Convention Center + outdoor live-fire & demo ranges (Palmachim / Negev)\nFormat:\nFull static & dynamic demonstrations of all listed systems\nLive-fire intercepts (Iron Beam vs drone/mortar salvos, Trophy vs RPG/ATGM)\nAI target-acquisition demos (real-time swarm coordination)\nClassified VIP briefings for strategic partners (US, India, UAE, Greece, Azerbaijan, etc.)\nNew product launches: Iron Beam mobile variant, next-gen loitering munition family, AI-enhanced C4I suite\n\nTarget Audience: Defense ministers, procurement chiefs, armed forces from 80+ countries (focus: <@1115754475332837528> , <@1456761963102339246> , Greece/Cyprus, Azerbaijan, Philippines, Vietnam, Poland, <@529331129648676865> , <@591636548731273216> , Australia, Singapore)\nGoal: Secure $4\u20136 billion in new signed contracts\n\n3. Export Acceleration Measures\n\nFast-track licensing (30\u201360 day approvals for pre-vetted partners)\nFlexible financing packages (Israeli Export Credit Insurance, 5\u20138 year loans at preferential rates)\nCo-production & technology-transfer options for high-volume buyers (India, UAE, Poland)\nCombat-data packages included: Real engagement statistics, kill-chain improvements, failure analyses\nDedicated sales teams embedded in key embassies (New Delhi, Abu Dhabi, Warsaw, Athens, Baku)\n\nEconomic & Strategic Impact Target\n\n2026 defense export goal: $15\u201318 billion (up from ~$13 billion in 2025)\nPosition Israel as #1 global exporter of drones, active protection, and AI battlefield systems per capita\nStrengthen strategic alliances through dependency on Israeli tech ecosystems*",
-      "timestamp": "2026-02-04T10:34:31.260633-05:00"
-    },
-    {
-      "user": "671859637015937052",
-      "command": "lmk if u guys want to buy anything",
-      "timestamp": "2026-02-04T10:34:44.833217-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(hmm should i buy from the dirty jews",
-      "timestamp": "2026-02-04T10:35:56.574102-05:00"
-    },
-    {
-      "user": "671859637015937052",
-      "command": "<@531740795020247040> (forgot u were a player)",
-      "timestamp": "2026-02-04T10:36:17.425953-05:00"
-    },
-    {
-      "user": "1246130327701815379",
-      "command": "Say good morning back",
-      "timestamp": "2026-02-04T10:36:39.057867-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "https://discord.com/channels/1465148715902959782/1465158921655292111/1468625442092355800\n\nHow does California (Gavin Newsom) respond-especially after the Eaton and Palisades Fires where reinsurers are pulling out of California entirely?\n\nDo we become the premier reinsurer in California?\n\nWhat does this mean for NORSA\u2019s returns?",
-      "timestamp": "2026-02-04T10:37:04.405406-05:00"
-    },
-    {
-      "user": "1246130327701815379",
-      "command": "You sound like a familiar man",
-      "timestamp": "2026-02-04T10:37:29.945920-05:00"
-    },
-    {
-      "user": "817360995197648947",
-      "command": "yo",
-      "timestamp": "2026-02-04T10:37:57.100957-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(i admire him very much",
-      "timestamp": "2026-02-04T10:38:05.606766-05:00"
-    },
-    {
-      "user": "817360995197648947",
-      "command": "we should invade israel",
-      "timestamp": "2026-02-04T10:38:11.569599-05:00"
-    },
-    {
-      "user": "529331129648676865",
-      "command": "(i support a no state solution",
-      "timestamp": "2026-02-04T10:38:34.966300-05:00"
-    },
-    {
-      "user": "671859637015937052",
-      "command": "https://discordapp.com/channels/1465148715902959782/1465159242012164402/1468630809693913250\n\nWhich countries sign major contracts or place firm orders during/after Expo Israel 2026 (list which ones and contract values\n\nTotal new export contracts signed\n\nAny major new co-production deals\n\nDo any Western countries (US, Germany, UK) raise export-control concerns or demand tech-security guarantees for AI/targeting systems?\n\nImpact on defense export revenue line in the national budget/economy\n\nSpecific systems that see the highest demand\n\nAny surprise buyers or large orders from unexpected countries",
-      "timestamp": "2026-02-04T10:38:51.618903-05:00"
-    },
-    {
-      "user": "671859637015937052",
-      "command": "(yes",
-      "timestamp": "2026-02-04T10:39:07.639986-05:00"
-    },
-    {
-      "user": "1115754475332837528",
-      "command": "<@591636548731273216> is the gm almost done?",
-      "timestamp": "2026-02-04T10:40:54.659956-05:00"
-    },
-    {
-      "user": "1394770091521999139",
-      "command": "Ngl, idk if i'll RP given that uh...well, there's very few centre-right nations.",
-      "timestamp": "2026-02-04T10:42:47.945894-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Isn\u2019t most of this already covered in OPEC",
-      "timestamp": "2026-02-04T10:48:56.477547-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "This deal doesn\u2019t need to be made",
-      "timestamp": "2026-02-04T10:49:07.846940-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Elect the German guy (Kast) and drop commies out if helicopters again",
-      "timestamp": "2026-02-04T11:48:37.476457-05:00"
-    },
-    {
-      "user": "559273678110457857",
-      "command": "Did I finally get a Hm",
-      "timestamp": "2026-02-04T12:43:21.924019-05:00"
-    },
-    {
-      "user": "559273678110457857",
-      "command": "Gm*",
-      "timestamp": "2026-02-04T12:43:23.671145-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Please don\u2019t make me conduct a viking expedition to the Suez",
-      "timestamp": "2026-02-04T12:48:11.427187-05:00"
-    },
-    {
-      "user": "1326932538962215027",
-      "command": "",
-      "timestamp": "2026-02-04T12:51:22.432869-05:00"
-    },
-    {
-      "user": "1326932538962215027",
-      "command": "can we partnership",
-      "timestamp": "2026-02-04T12:51:36.678699-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "",
-      "timestamp": "2026-02-04T13:45:09.134427-05:00"
-    },
-    {
-      "user": "817360995197648947",
-      "command": "nah youd lose",
-      "timestamp": "2026-02-04T13:45:36.078919-05:00"
-    },
     {
       "user": "314943232112984064",
       "command": "Not with the power of Bibi Netanyahu",
@@ -254,6 +129,131 @@
       "user": "1299000209900044423",
       "command": "If need something change, tell me",
       "timestamp": "2026-02-04T17:43:42.670806-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "s?m",
+      "timestamp": "2026-02-04T18:05:04.470475-05:00"
+    },
+    {
+      "user": "742932199191347242",
+      "command": "Mfw no gm",
+      "timestamp": "2026-02-04T18:05:27.444425-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "I\u2019m waiting for a gm myself",
+      "timestamp": "2026-02-04T18:05:41.745760-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Yall im going as fast as I can",
+      "timestamp": "2026-02-04T18:05:56.786683-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Mb guys",
+      "timestamp": "2026-02-04T18:05:58.532034-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "I didn\u2019t mean for it to be this clogged <@742932199191347242> <@1115754475332837528>",
+      "timestamp": "2026-02-04T18:06:18.943284-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "Brazil isn\u2019t going to do it btw",
+      "timestamp": "2026-02-04T18:06:39.096867-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Then I\u2019ll do it",
+      "timestamp": "2026-02-04T18:06:49.729015-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Accepted",
+      "timestamp": "2026-02-04T18:06:57.376479-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "Alright thank you",
+      "timestamp": "2026-02-04T18:07:00.115293-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Here",
+      "timestamp": "2026-02-04T18:07:00.409475-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Ye",
+      "timestamp": "2026-02-04T18:07:05.120041-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Yw*",
+      "timestamp": "2026-02-04T18:07:07.772230-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Ping me where",
+      "timestamp": "2026-02-04T18:07:10.409624-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Denmark how are you",
+      "timestamp": "2026-02-04T18:07:14.040644-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Good, Gaming",
+      "timestamp": "2026-02-04T18:07:20.852649-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "GMing",
+      "timestamp": "2026-02-04T18:09:11.626293-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Dang autocorrect",
+      "timestamp": "2026-02-04T18:09:16.082703-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Name: T-72M4A1 CZ\nType: Main Battle Tank\nQuantity: 80\nPrice per unit: $8,000,000\nPrice: $640,000,000\nDuration: 2027-2029",
+      "timestamp": "2026-02-04T18:09:32.417201-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "Name: L-160 Skykiller I \nType: Multirole 5th Generation Fighter jet \nQuantity: 40 (made in france)\nPrice per unit: $60,000,000\nPrice: $2,400,000,000\nDuration: 2027-2028",
+      "timestamp": "2026-02-04T18:11:52.804196-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "<@1367955172373823629> <@689448093191897139> the\nJets done",
+      "timestamp": "2026-02-04T18:13:05.427282-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "The world's most advanced 4.5th generation fighter jet has been made!<@1367955172373823629>",
+      "timestamp": "2026-02-04T18:14:29.663175-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "...",
+      "timestamp": "2026-02-04T18:14:48.701200-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Ok",
+      "timestamp": "2026-02-04T18:18:23.870304-05:00"
+    },
+    {
+      "user": "1276210518171975823",
+      "command": "<@1115754475332837528> wanna buy some jets",
+      "timestamp": "2026-02-04T18:21:20.299925-05:00"
     }
   ],
   "advancement_history": [
