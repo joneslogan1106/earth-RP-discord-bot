@@ -1,25 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T04:03:40.328782-05:00",
+  "last_check_timestamp": "2026-02-04T05:04:12.098050-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "591636548731273216",
-      "command": "I will complete it tomorrow morning I promise",
-      "timestamp": "2026-02-03T20:59:41.562419-05:00"
-    },
-    {
-      "user": "1276210518171975823",
-      "command": "Hi",
-      "timestamp": "2026-02-03T20:59:57.618438-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "<@944708478113546280> supposed to be on that",
-      "timestamp": "2026-02-03T21:01:17.094358-05:00"
-    },
     {
       "user": "591636548731273216",
       "command": "I had a really busy day barely did anything else online other than working on it, but around 1/3 of the GM is ready and I pretty much know what I will be writing",
@@ -254,6 +239,21 @@
       "user": "817360995197648947",
       "command": "",
       "timestamp": "2026-02-04T03:29:50.953030-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "||# Preventing Division of Syria ||\n\n\n> ||Israel is attempting to divide Syria through Kurdish Druze and Alawites with Mossad instigating things in Suwayda Governorate. This is plain and simple unacceptable for the Turkish Republic so National Intelligence Agency will begin Operation Desert Spring in order to weaken the Druze movements in Suwayda Region||\n\n> ||We begin a smear campaign against Al-Hijri the leader of Druze Rebellion in the area. The Campaign will be conducted both in online and in the ground by our agent. The Campaign will focus on Al-Hijri's support for Assad during the civil war until 2021 and his earlier support for Syrian Unity in 2025 until Mossad hired him. We show him as a weak indecisive leader who supports the highest bidder instead good of Druze People. His armed gangs also attacked both the Syrian Government and Druze's in Suwayda who opposed him.||\n\n> ||Pro Government Druze Groups in Suwayda will get a $60 Million worth of Support from National Intelligence with Trucks, Assault Rifles and Heavy weapons being supplied to them. The regions desert terrain makes delivery of these weapons easy.||\n\n> ||While the weapon deliveries are happening Turkish Intelligence Agency will leak these deliveries of weapons to the Druze Rebel Leader in Suwayda Forcing him to act against these rebels. This will create the chaos necessary in Suwayda for the Government forces to intervene and take control of the region from Al Hijri.||",
+      "timestamp": "2026-02-04T05:13:21.443015-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "<@1096877344221831220> be preparead",
+      "timestamp": "2026-02-04T05:13:25.022960-05:00"
+    },
+    {
+      "user": "301380599451746305",
+      "command": "https://discord.com/channels/1465148715902959782/1465159015129415952/1468549987611705488\n\nDid the Suwayda region which is defacto controlled by Druze Rebels started a conflict with Pro-GOvernment Druze Groups",
+      "timestamp": "2026-02-04T05:15:02.915663-05:00"
     }
   ],
   "advancement_history": [
