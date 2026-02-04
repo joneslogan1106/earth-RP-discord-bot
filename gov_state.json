@@ -1,40 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-03T23:45:54.874500-05:00",
+  "last_check_timestamp": "2026-02-04T00:08:43.339287-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "Cuz I was tryna do that because I get notifications whenever it\u2019s online",
-      "timestamp": "2026-02-03T20:48:01.887407-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "!date",
-      "timestamp": "2026-02-03T20:48:12.869901-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "There it is",
-      "timestamp": "2026-02-03T20:48:16.186492-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "Try running it",
-      "timestamp": "2026-02-03T20:48:18.929395-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "<@524016564065009674>",
-      "timestamp": "2026-02-03T20:49:05.510759-05:00"
-    },
-    {
-      "user": "524016564065009674",
-      "command": "!date",
-      "timestamp": "2026-02-03T20:49:21.342541-05:00"
-    },
     {
       "user": "524016564065009674",
       "command": "in the meantime, can we get someone to gm <#1465448028310863965>",
@@ -254,6 +224,36 @@
       "user": "1367955172373823629",
       "command": "!send",
       "timestamp": "2026-02-04T00:00:43.362354-05:00"
+    },
+    {
+      "user": "1355984934224793882",
+      "command": "",
+      "timestamp": "2026-02-04T00:14:19.799044-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Cannot GM this due to my posiiton in the RP",
+      "timestamp": "2026-02-04T00:29:06.959799-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Ok",
+      "timestamp": "2026-02-04T00:29:45.634875-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "I will try to get someone on it, as I'm going through the entire queue",
+      "timestamp": "2026-02-04T00:30:10.768612-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "It\u2019s all good man",
+      "timestamp": "2026-02-04T00:30:22.357175-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Alr thx",
+      "timestamp": "2026-02-04T00:30:37.771966-05:00"
     }
   ],
   "advancement_history": [
