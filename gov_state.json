@@ -1,15 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T00:08:43.339287-05:00",
+  "last_check_timestamp": "2026-02-04T00:55:11.946727-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "524016564065009674",
-      "command": "in the meantime, can we get someone to gm <#1465448028310863965>",
-      "timestamp": "2026-02-03T20:56:56.485478-05:00"
-    },
     {
       "user": "524016564065009674",
       "command": "submitted a move nearly 5 days ago now",
@@ -254,6 +249,11 @@
       "user": "1367955172373823629",
       "command": "Alr thx",
       "timestamp": "2026-02-04T00:30:37.771966-05:00"
+    },
+    {
+      "user": "1287230350879359048",
+      "command": "",
+      "timestamp": "2026-02-04T01:03:52.626300-05:00"
     }
   ],
   "advancement_history": [
