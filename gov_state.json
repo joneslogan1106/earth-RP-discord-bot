@@ -1,45 +1,10 @@
 {
-  "current_date": "2026-12-01T00:00:00-05:00",
-  "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T23:22:29.558496-05:00",
+  "current_date": "2027-04-01T00:00:00-05:00",
+  "last_advance_date": "2026-02-04",
+  "last_check_timestamp": "2026-02-03T23:45:54.874500-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "Got it",
-      "timestamp": "2026-02-03T17:14:49.902422-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "We just share the risk and profits on an insurance company that helps to diversify our portfolios and fund our nations",
-      "timestamp": "2026-02-03T17:59:55.106650-05:00"
-    },
-    {
-      "user": "1276210518171975823",
-      "command": "Alright but what about the German part",
-      "timestamp": "2026-02-03T18:42:18.381418-05:00"
-    },
-    {
-      "user": "1276210518171975823",
-      "command": "How do they get to do that",
-      "timestamp": "2026-02-03T18:42:24.702281-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "If you wished for Slovakian reunion, my recommendation is doing an election where a charismatic pro-union candidate wins (with at least 8-12 months of campaigning and events that boost popularity before hand) as your first step <@1276210518171975823>",
-      "timestamp": "2026-02-03T18:47:23.101532-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "s?m",
-      "timestamp": "2026-02-03T18:49:31.036947-05:00"
-    },
-    {
-      "user": "1145845479234601032",
-      "command": "Need to pump up that activity",
-      "timestamp": "2026-02-03T18:49:47.169867-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "Cuz I was tryna do that because I get notifications whenever it\u2019s online",
@@ -254,6 +219,41 @@
       "user": "860609867592630292",
       "command": "",
       "timestamp": "2026-02-03T23:38:06.394059-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-03T23:59:34.271378-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-03T23:59:52.888488-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-03T23:59:59.710596-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-04T00:00:03.590124-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!help",
+      "timestamp": "2026-02-04T00:00:25.374327-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!advance 4",
+      "timestamp": "2026-02-04T00:00:36.129074-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!send",
+      "timestamp": "2026-02-04T00:00:43.362354-05:00"
     }
   ],
   "advancement_history": [
@@ -271,6 +271,14 @@
       "months_advanced": 4,
       "old_date": "2026-08-01T00:00:00-04:00",
       "new_date": "2026-12-01T00:00:00-04:00",
+      "type": "scheduled"
+    },
+    {
+      "timestamp": "2026-02-04T00:00:36.129618-05:00",
+      "days_missed": 0,
+      "months_advanced": 4,
+      "old_date": "2026-12-01T00:00:00-05:00",
+      "new_date": "2027-04-01T00:00:00-05:00",
       "type": "scheduled"
     }
   ],
