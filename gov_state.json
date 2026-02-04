@@ -1,15 +1,10 @@
 {
   "current_date": "2026-12-01T00:00:00-05:00",
   "last_advance_date": "2026-02-03",
-  "last_check_timestamp": "2026-02-03T21:27:36.094257-05:00",
+  "last_check_timestamp": "2026-02-03T23:22:29.558496-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1145845479234601032",
-      "command": "<@1367955172373823629> that\u2019s important for you to note too",
-      "timestamp": "2026-02-03T17:14:30.462795-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "Got it",
@@ -254,6 +249,11 @@
       "user": "742932199191347242",
       "command": "On like day 3 or smth for me",
       "timestamp": "2026-02-03T21:46:25.338561-05:00"
+    },
+    {
+      "user": "860609867592630292",
+      "command": "",
+      "timestamp": "2026-02-03T23:38:06.394059-05:00"
     }
   ],
   "advancement_history": [
