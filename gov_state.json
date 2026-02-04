@@ -1,35 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T11:28:42.350398-05:00",
+  "last_check_timestamp": "2026-02-04T12:32:25.143329-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "314943232112984064",
-      "command": "Yeah, this just goes over the insurance agreement-specifically focusing on aspects where we have advantages (energy, terror, climate, and maritime) as well as focusing of reinsurance-insuring insurers",
-      "timestamp": "2026-02-04T09:49:46.804455-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "Quite a low risk, plus we both can directly influence and mitigate the risk of our main coverage options through our domestic and foreign policies",
-      "timestamp": "2026-02-04T09:50:46.602072-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "So",
-      "timestamp": "2026-02-04T09:50:47.209595-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "We make a company",
-      "timestamp": "2026-02-04T09:50:49.847766-05:00"
-    },
-    {
-      "user": "1456761963102339246",
-      "command": "And",
-      "timestamp": "2026-02-04T09:51:03.807352-05:00"
-    },
     {
       "user": "314943232112984064",
       "command": "The company is made, it\u2019s pretty passive.",
@@ -254,6 +229,31 @@
       "user": "314943232112984064",
       "command": "Elect the German guy (Kast) and drop commies out if helicopters again",
       "timestamp": "2026-02-04T11:48:37.476457-05:00"
+    },
+    {
+      "user": "559273678110457857",
+      "command": "Did I finally get a Hm",
+      "timestamp": "2026-02-04T12:43:21.924019-05:00"
+    },
+    {
+      "user": "559273678110457857",
+      "command": "Gm*",
+      "timestamp": "2026-02-04T12:43:23.671145-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Please don\u2019t make me conduct a viking expedition to the Suez",
+      "timestamp": "2026-02-04T12:48:11.427187-05:00"
+    },
+    {
+      "user": "1326932538962215027",
+      "command": "",
+      "timestamp": "2026-02-04T12:51:22.432869-05:00"
+    },
+    {
+      "user": "1326932538962215027",
+      "command": "can we partnership",
+      "timestamp": "2026-02-04T12:51:36.678699-05:00"
     }
   ],
   "advancement_history": [
