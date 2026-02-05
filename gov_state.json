@@ -1,15 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T04:30:02.063553-05:00",
+  "last_check_timestamp": "2026-02-05T05:26:50.618720-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1299000209900044423",
-      "command": "today . . .this will be the day when all of God\u2019s children will be able to sing with new meaning.",
-      "timestamp": "2026-02-04T17:38:09.165118-05:00"
-    },
     {
       "user": "559273678110457857",
       "command": "Day 900 of being locked",
@@ -254,6 +249,11 @@
       "user": "1145845479234601032",
       "command": "Approved",
       "timestamp": "2026-02-05T04:48:58.351407-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Slept through my alarm award <:ptsd:1280546203582599189> <:ptsd:1280546203582599189> <:ptsd:1280546203582599189>",
+      "timestamp": "2026-02-05T05:41:25.037623-05:00"
     }
   ],
   "advancement_history": [
