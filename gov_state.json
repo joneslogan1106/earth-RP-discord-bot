@@ -1,15 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T00:01:19.290499-05:00",
+  "last_check_timestamp": "2026-02-05T01:01:11.468249-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "314943232112984064",
-      "command": "Lex Luther",
-      "timestamp": "2026-02-04T17:33:10.671102-05:00"
-    },
     {
       "user": "1299000209900044423",
       "command": "\ud83e\udd23 what is best my real name is same to Luther XD",
@@ -254,6 +249,11 @@
       "user": "524016564065009674",
       "command": "Alr, what's up",
       "timestamp": "2026-02-05T00:20:49.611480-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "!date",
+      "timestamp": "2026-02-05T01:14:00.426101-05:00"
     }
   ],
   "advancement_history": [
