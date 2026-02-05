@@ -1,15 +1,10 @@
 {
   "current_date": "2027-04-01T00:00:00-05:00",
   "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T18:46:26.878431-05:00",
+  "last_check_timestamp": "2026-02-04T22:13:31.273114-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1145845479234601032",
-      "command": "<@&1465149663169613927> someone make a separate ballsdex channel",
-      "timestamp": "2026-02-04T15:17:37.766257-05:00"
-    },
     {
       "user": "1115754475332837528",
       "command": "<@591636548731273216>",
@@ -254,6 +249,11 @@
       "user": "1145845479234601032",
       "command": "Reapproved",
       "timestamp": "2026-02-04T19:06:16.770679-05:00"
+    },
+    {
+      "user": "314943232112984064",
+      "command": "Fuck my fat fucking chud life",
+      "timestamp": "2026-02-04T22:30:01.434125-05:00"
     }
   ],
   "advancement_history": [
