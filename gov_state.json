@@ -1,15 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T07:39:10.298393-05:00",
+  "last_check_timestamp": "2026-02-05T08:53:39.455478-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1367955172373823629",
-      "command": "Like not joking",
-      "timestamp": "2026-02-04T17:41:15.701138-05:00"
-    },
     {
       "user": "1299000209900044423",
       "command": "Company Template Company\n\nCompany: Fennec Fox Premium\nCompany Name: Fennec Fox Premium Film d.o.o.\nCompany type: Private\nChief Executive Officer: Luka Kolega\nHeadquarters: Zadar\nOn Stock Market: N\nParent Company: N/A\nEstimated Value: 5 m\nIndustry: Media industry\nLogo:",
@@ -254,6 +249,11 @@
       "user": "976324666480271370",
       "command": "# \ud83c\udde7\ud83c\uddf8 Bahamas \ud83c\udde7\ud83c\uddf8 \n`` The Anti-Gang Initiative`` \n\n\n> *In response to the recent surge in street violence, the Davis Administration has officially granted the Anti-Gang Task Force (AGTF) broader authority to work alongside regular police units in a comprehensive crackdown on organized crime. The administration is also establishing a Zero-Tolerance zone throughout Nassau to restore order. Alongside these measures, the BCMU (Bahamas Customs Marine Unit) has begun checking any vessel that appears to be carrying weapons or drugs, making any craft moving on Bahamian waters subject to search.\n> \n> To support this mission, the government is launching a massive technological overhaul, which includes the installation of more cameras and gunshot detection systems across the capital. Beyond the tech, the administration is adding better lighting to dark streets, setting up youth programs, and urging civilians who witness crime to report it immediately.\n> \n> The government's also getting tougher on sentences - they want to make sure these criminals don't just end up back on the streets. Gang membership now carries a 20-year prison sentence, while gang leaders face Life Imprisonment. Additionally, the administration is enacting a \"No Bail\" policy for all illegal firearm offenses, meaning anyone caught with a gun remains in custody until their trial. That goes for everyone, but when kids get caught up in serious violent crimes, the Government will have them tried as adults in specialized reform wings. On top of that, they're using forfeiture laws to take away the homes and boats of convicted traffickers and gang leaders to fund community centers.*",
       "timestamp": "2026-02-05T06:53:40.930731-05:00"
+    },
+    {
+      "user": "1115754475332837528",
+      "command": "Gm when",
+      "timestamp": "2026-02-05T09:06:16.705468-05:00"
     }
   ],
   "advancement_history": [
