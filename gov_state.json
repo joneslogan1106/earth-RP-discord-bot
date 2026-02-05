@@ -1,15 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T08:53:39.455478-05:00",
+  "last_check_timestamp": "2026-02-05T09:37:55.089036-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1299000209900044423",
-      "command": "Company Template Company\n\nCompany: Fennec Fox Premium\nCompany Name: Fennec Fox Premium Film d.o.o.\nCompany type: Private\nChief Executive Officer: Luka Kolega\nHeadquarters: Zadar\nOn Stock Market: N\nParent Company: N/A\nEstimated Value: 5 m\nIndustry: Media industry\nLogo:",
-      "timestamp": "2026-02-04T17:43:26.206452-05:00"
-    },
     {
       "user": "1299000209900044423",
       "command": "If need something change, tell me",
@@ -254,6 +249,11 @@
       "user": "1115754475332837528",
       "command": "Gm when",
       "timestamp": "2026-02-05T09:06:16.705468-05:00"
+    },
+    {
+      "user": "821673976006311946",
+      "command": "",
+      "timestamp": "2026-02-05T09:59:27.060170-05:00"
     }
   ],
   "advancement_history": [
