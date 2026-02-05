@@ -1,50 +1,10 @@
 {
-  "current_date": "2027-04-01T00:00:00-05:00",
-  "last_advance_date": "2026-02-04",
-  "last_check_timestamp": "2026-02-04T22:13:31.273114-05:00",
+  "current_date": "2027-08-01T00:00:00-05:00",
+  "last_advance_date": "2026-02-05",
+  "last_check_timestamp": "2026-02-05T00:01:19.290499-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1115754475332837528",
-      "command": "<@591636548731273216>",
-      "timestamp": "2026-02-04T15:59:21.364930-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "# I AM CLEARING THE GM QUEUE RN\nAlso I have gmed some stuff just got to wait for it to be approved",
-      "timestamp": "2026-02-04T16:12:19.176736-05:00"
-    },
-    {
-      "user": "742932199191347242",
-      "command": "https://discord.com/channels/1465148715902959782/1467371452238926069/1468087805187195093\nDoes all equipment get home safe (or to Algeria)?",
-      "timestamp": "2026-02-04T16:59:33.724808-05:00"
-    },
-    {
-      "user": "1367955172373823629",
-      "command": "If needed I\u2019ll step in",
-      "timestamp": "2026-02-04T17:20:30.168677-05:00"
-    },
-    {
-      "user": "1299000209900044423",
-      "command": "",
-      "timestamp": "2026-02-04T17:29:48.196160-05:00"
-    },
-    {
-      "user": "1299000209900044423",
-      "command": "hello",
-      "timestamp": "2026-02-04T17:30:36.335454-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "I\u2019m essentially volunteering to support Sea Viper",
-      "timestamp": "2026-02-04T17:30:39.093152-05:00"
-    },
-    {
-      "user": "314943232112984064",
-      "command": "and asking to adopt the SAMP/T NG",
-      "timestamp": "2026-02-04T17:31:02.707429-05:00"
-    },
     {
       "user": "314943232112984064",
       "command": "Lex Luther",
@@ -254,6 +214,46 @@
       "user": "314943232112984064",
       "command": "Fuck my fat fucking chud life",
       "timestamp": "2026-02-04T22:30:01.434125-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "",
+      "timestamp": "2026-02-05T00:11:01.793135-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "ignore this its prob being rate limited",
+      "timestamp": "2026-02-05T00:11:02.659517-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Also mass of gm queue is cleared",
+      "timestamp": "2026-02-05T00:11:11.037473-05:00"
+    },
+    {
+      "user": "559273678110457857",
+      "command": "<@524016564065009674> Heyo I have some questions before my next post",
+      "timestamp": "2026-02-05T00:11:23.506853-05:00"
+    },
+    {
+      "user": "559273678110457857",
+      "command": "If ur around",
+      "timestamp": "2026-02-05T00:12:40.765061-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "Ok prob should be fixed",
+      "timestamp": "2026-02-05T00:20:03.363724-05:00"
+    },
+    {
+      "user": "1367955172373823629",
+      "command": "-# there were 3 actjons all running the bot at the same time",
+      "timestamp": "2026-02-05T00:20:16.473101-05:00"
+    },
+    {
+      "user": "524016564065009674",
+      "command": "Alr, what's up",
+      "timestamp": "2026-02-05T00:20:49.611480-05:00"
     }
   ],
   "advancement_history": [
@@ -279,6 +279,14 @@
       "months_advanced": 4,
       "old_date": "2026-12-01T00:00:00-05:00",
       "new_date": "2027-04-01T00:00:00-05:00",
+      "type": "scheduled"
+    },
+    {
+      "timestamp": "2026-02-05T00:01:19.290568-05:00",
+      "days_missed": 1,
+      "months_advanced": 4,
+      "old_date": "2027-04-01T00:00:00-05:00",
+      "new_date": "2027-08-01T00:00:00-05:00",
       "type": "scheduled"
     }
   ],
