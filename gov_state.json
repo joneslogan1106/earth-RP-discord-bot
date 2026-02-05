@@ -1,20 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T05:26:50.618720-05:00",
+  "last_check_timestamp": "2026-02-05T06:23:09.477893-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "559273678110457857",
-      "command": "Day 900 of being locked",
-      "timestamp": "2026-02-04T17:39:08.337889-05:00"
-    },
-    {
-      "user": "559273678110457857",
-      "command": "Should auto resolve my entire war and just give me Cuba tbh",
-      "timestamp": "2026-02-04T17:39:22.655620-05:00"
-    },
     {
       "user": "1367955172373823629",
       "command": "I\u2019m doing your gm stuff rn",
@@ -254,6 +244,16 @@
       "user": "1145845479234601032",
       "command": "Slept through my alarm award <:ptsd:1280546203582599189> <:ptsd:1280546203582599189> <:ptsd:1280546203582599189>",
       "timestamp": "2026-02-05T05:41:25.037623-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "So I\u2019m gonna have an announcement out by noon today, I haven\u2019t been procrastinating things have literally just been in the way",
+      "timestamp": "2026-02-05T06:42:30.973155-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "But I\u2019ve been able to chip at it",
+      "timestamp": "2026-02-05T06:42:43.780960-05:00"
     }
   ],
   "advancement_history": [
