@@ -1,25 +1,10 @@
 {
   "current_date": "2027-08-01T00:00:00-05:00",
   "last_advance_date": "2026-02-05",
-  "last_check_timestamp": "2026-02-05T09:37:55.089036-05:00",
+  "last_check_timestamp": "2026-02-05T10:27:06.709211-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
-    {
-      "user": "1299000209900044423",
-      "command": "If need something change, tell me",
-      "timestamp": "2026-02-04T17:43:42.670806-05:00"
-    },
-    {
-      "user": "1115754475332837528",
-      "command": "s?m",
-      "timestamp": "2026-02-04T18:05:04.470475-05:00"
-    },
-    {
-      "user": "742932199191347242",
-      "command": "Mfw no gm",
-      "timestamp": "2026-02-04T18:05:27.444425-05:00"
-    },
     {
       "user": "1115754475332837528",
       "command": "I\u2019m waiting for a gm myself",
@@ -254,6 +239,21 @@
       "user": "821673976006311946",
       "command": "",
       "timestamp": "2026-02-05T09:59:27.060170-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "Oh fuck I lowkey forgot this channel existed",
+      "timestamp": "2026-02-05T10:31:45.162370-05:00"
+    },
+    {
+      "user": "821673976006311946",
+      "command": "Hello",
+      "timestamp": "2026-02-05T10:34:16.954708-05:00"
+    },
+    {
+      "user": "1145845479234601032",
+      "command": "<@700103014928875670> gonna have to remove you as china for inactivity",
+      "timestamp": "2026-02-05T10:42:53.722915-05:00"
     }
   ],
   "advancement_history": [
