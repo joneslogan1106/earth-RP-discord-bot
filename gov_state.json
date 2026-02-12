@@ -1,7 +1,7 @@
 {
-  "current_date": "2029-08-01T00:00:00-05:00",
-  "last_advance_date": "2026-02-11",
-  "last_check_timestamp": "2026-02-11T22:24:11.243544-05:00",
+  "current_date": "2029-12-01T00:00:00-05:00",
+  "last_advance_date": "2026-02-12",
+  "last_check_timestamp": "2026-02-12T00:12:00.453765-05:00",
   "notifications_enabled": true,
   "time_format": "12hr",
   "command_history": [
@@ -335,6 +335,14 @@
       "months_advanced": 4,
       "old_date": "2029-04-01T00:00:00-05:00",
       "new_date": "2029-08-01T00:00:00-05:00",
+      "type": "scheduled"
+    },
+    {
+      "timestamp": "2026-02-12T00:12:00.453832-05:00",
+      "days_missed": 1,
+      "months_advanced": 4,
+      "old_date": "2029-08-01T00:00:00-05:00",
+      "new_date": "2029-12-01T00:00:00-05:00",
       "type": "scheduled"
     }
   ],
